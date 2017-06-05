@@ -256,12 +256,60 @@
     <Compile Include="Migrations\201706040304228_Initial.Designer.cs">
       <DependentUpon>201706040304228_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706050921492_AddedAccommodartion.cs" />
+    <Compile Include="Migrations\201706050921492_AddedAccommodartion.Designer.cs">
+      <DependentUpon>201706050921492_AddedAccommodartion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706050938034_AddedCountry.cs" />
+    <Compile Include="Migrations\201706050938034_AddedCountry.Designer.cs">
+      <DependentUpon>201706050938034_AddedCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706050950101_AddedRegion.cs" />
+    <Compile Include="Migrations\201706050950101_AddedRegion.Designer.cs">
+      <DependentUpon>201706050950101_AddedRegion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706050959517_AddedPlace.cs" />
+    <Compile Include="Migrations\201706050959517_AddedPlace.Designer.cs">
+      <DependentUpon>201706050959517_AddedPlace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051002551_UpdatedPlaceAndAccommodation.cs" />
+    <Compile Include="Migrations\201706051002551_UpdatedPlaceAndAccommodation.Designer.cs">
+      <DependentUpon>201706051002551_UpdatedPlaceAndAccommodation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051009356_AddAccommodationType.cs" />
+    <Compile Include="Migrations\201706051009356_AddAccommodationType.Designer.cs">
+      <DependentUpon>201706051009356_AddAccommodationType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051022286_AddRoom.cs" />
+    <Compile Include="Migrations\201706051022286_AddRoom.Designer.cs">
+      <DependentUpon>201706051022286_AddRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051036163_AddComment.cs" />
+    <Compile Include="Migrations\201706051036163_AddComment.Designer.cs">
+      <DependentUpon>201706051036163_AddComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051050450_AddRoomReservations.cs" />
+    <Compile Include="Migrations\201706051050450_AddRoomReservations.Designer.cs">
+      <DependentUpon>201706051050450_AddRoomReservations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051055089_AddOwner.cs" />
+    <Compile Include="Migrations\201706051055089_AddOwner.Designer.cs">
+      <DependentUpon>201706051055089_AddOwner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Accommodation.cs" />
+    <Compile Include="Models\AccommodationType.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BAContext.cs" />
     <Compile Include="Models\BAIdentityUser.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\RoomReservations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
@@ -343,6 +391,36 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706040304228_Initial.resx">
       <DependentUpon>201706040304228_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050921492_AddedAccommodartion.resx">
+      <DependentUpon>201706050921492_AddedAccommodartion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050938034_AddedCountry.resx">
+      <DependentUpon>201706050938034_AddedCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050950101_AddedRegion.resx">
+      <DependentUpon>201706050950101_AddedRegion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706050959517_AddedPlace.resx">
+      <DependentUpon>201706050959517_AddedPlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051002551_UpdatedPlaceAndAccommodation.resx">
+      <DependentUpon>201706051002551_UpdatedPlaceAndAccommodation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051009356_AddAccommodationType.resx">
+      <DependentUpon>201706051009356_AddAccommodationType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051022286_AddRoom.resx">
+      <DependentUpon>201706051022286_AddRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051036163_AddComment.resx">
+      <DependentUpon>201706051036163_AddComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051050450_AddRoomReservations.resx">
+      <DependentUpon>201706051050450_AddRoomReservations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051055089_AddOwner.resx">
+      <DependentUpon>201706051055089_AddOwner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

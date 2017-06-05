@@ -9,5 +9,9 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
         public int FullName { get; set; }
+
+        public List<Comment> Comments { get; set; }
+
+        public List<Accommodation> Accommodations { get; set; }
     }
 }
