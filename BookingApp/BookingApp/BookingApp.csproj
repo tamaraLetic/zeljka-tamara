@@ -308,6 +308,10 @@
     <Compile Include="Migrations\201706060840453_AccomodationTypeUniqueName.Designer.cs">
       <DependentUpon>201706060840453_AccomodationTypeUniqueName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706061047214_BAIdentityUserNew.cs" />
+    <Compile Include="Migrations\201706061047214_BAIdentityUserNew.Designer.cs">
+      <DependentUpon>201706061047214_BAIdentityUserNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -436,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706060840453_AccomodationTypeUniqueName.resx">
       <DependentUpon>201706060840453_AccomodationTypeUniqueName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706061047214_BAIdentityUserNew.resx">
+      <DependentUpon>201706061047214_BAIdentityUserNew.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

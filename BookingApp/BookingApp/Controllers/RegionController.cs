@@ -38,6 +38,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Regions/{id}")]
         [ResponseType(typeof(void))]
@@ -74,6 +75,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Regions")]
         [ResponseType(typeof(Region))]
@@ -90,6 +92,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {conroller = "Region",  id = region.Id }, region);
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]

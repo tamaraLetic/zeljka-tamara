@@ -38,6 +38,7 @@ namespace BookingApp.Controllers
             return Ok(country);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Countries/{id}")]
         [ResponseType(typeof(void))]
@@ -74,6 +75,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Countries")]
         [ResponseType(typeof(Country))]
@@ -90,6 +92,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {conrtoller = "Country", id = country.Id }, country);
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Countries/{id}")]
         [ResponseType(typeof(Country))]

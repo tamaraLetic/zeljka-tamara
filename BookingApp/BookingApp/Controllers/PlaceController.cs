@@ -37,6 +37,7 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
+        [Authorize]
         [HttpPut]
         [Route("Places/{id}")]
         [ResponseType(typeof(void))]
@@ -73,6 +74,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Places")]
         [ResponseType(typeof(Place))]
@@ -89,6 +91,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {controller = "Place", id = place.Id }, place);
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("Places/{id}")]
         [ResponseType(typeof(Place))]
