@@ -105,6 +105,9 @@ namespace BookingApp.Controllers
             }
 
             db.Accommodations.Remove(accommodation);
+
+            db.Comments.RemoveRange(db.Comments.Where(a => a.AccommodationId == id));
+            db.Rooms.RemoveRange(db.Rooms.Where(a => a.AccommodationId == id));
             db.SaveChanges();
 
             return Ok(accommodation);
