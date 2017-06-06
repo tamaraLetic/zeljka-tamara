@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api/RoomReservation")]
+    [RoutePrefix("api")]
     public class RoomReservationController : ApiController
     {
         private BAContext db = new BAContext();
@@ -87,7 +87,7 @@ namespace BookingApp.Controllers
             db.RoomReservations.Add(roomReservations);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = roomReservations.Id }, roomReservations);
+            return CreatedAtRoute("DefaultApi", new { conroller = "RoomReservations", id = roomReservations.Id }, roomReservations);
         }
 
         [HttpDelete]

@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api/Comment")]
+    [RoutePrefix("api")]
     public class CommentController : ApiController
     {
         private BAContext db = new BAContext();
@@ -87,7 +87,7 @@ namespace BookingApp.Controllers
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.AppUserId, id2 = comment.AccommodationId }, comment);
+            return CreatedAtRoute("DefaultApi", new {controller = "Comment", id = comment.AppUserId, id2 = comment.AccommodationId }, comment);
         }
 
         [HttpDelete]

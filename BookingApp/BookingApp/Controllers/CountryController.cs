@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api/Country")]
+    [RoutePrefix("api")]
     public class CountryController : ApiController
     {
         private BAContext db = new BAContext();
@@ -87,7 +87,7 @@ namespace BookingApp.Controllers
             db.Countries.Add(country);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = country.Id }, country);
+            return CreatedAtRoute("DefaultApi", new {conrtoller = "Country", id = country.Id }, country);
         }
 
         [HttpDelete]
