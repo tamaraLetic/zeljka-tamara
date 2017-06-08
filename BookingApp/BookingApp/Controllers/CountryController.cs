@@ -14,7 +14,7 @@ namespace BookingApp.Controllers
     [RoutePrefix("api")]
     public class CountryController : ApiController
     {
-        private BAContext db = new BAContext();
+        private BAContext db = BAContext.Create();
 
 
         [HttpGet]
@@ -75,7 +75,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpPost]
         [Route("Countries")]
         [ResponseType(typeof(Country))]
@@ -89,7 +89,7 @@ namespace BookingApp.Controllers
             db.Countries.Add(country);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new {conrtoller = "Country", id = country.Id }, country);
+            return CreatedAtRoute("DefaultApi", new {controller = "Country", id = country.Id }, country);
         }
 
         [Authorize]

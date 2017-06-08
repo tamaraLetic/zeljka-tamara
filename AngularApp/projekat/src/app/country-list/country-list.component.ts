@@ -22,17 +22,14 @@ export class CountryListComponent implements OnInit {
 
   ngOnInit() {
     //this.countries=this.countryService.getAll();
-    this.countryService.getAll().subscribe(this.getAllCallback);
+    this.countryService.getAll().subscribe(res => this.countries = res.json());
   }
 //  onSubmit(country: Country){
   onSubmit(){
     //this.countries.push(new Country(2, this.Name, this.Code));
-    this.countryService.create(new Country(2, this.Name, this.Code));
+    //this.countryService.create(new Country(2, this.Name, this.Code));
+    this.countryService.create(new Country(1, this.Name, this.Code)).subscribe(res => this.countries.push(res.json()));
     this.Name="";
     this.Code="";
-  }
-
-  getAllCallback(data:any){
-    this.countries=data.json();
   }
 }

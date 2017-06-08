@@ -25,7 +25,7 @@ export class CountryListService{
         //return this.countries.find(c=>c.Id == id);
         return this.http.get(`http://localhost:54042/api/countries/${id}`);
     }
-    create(country: Country): Observable<any>
+    create(country: Country): Observable<Response>
     {
         //this.countries.push(country);
 
