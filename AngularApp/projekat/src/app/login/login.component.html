@@ -1,0 +1,21 @@
+<h1>
+  Login input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="Uname">Username:</label><br>
+      <input type="text" id="Uname" name="Uname" value="" [(ngModel)]="Uname">
+    </div>
+ 
+  <br>
+  <div>
+      <label for="Pass">Password:</label><br> 
+      <input type="text" id="Pass" name="Pass" value="" [(ngModel)]="Pass">
+  </div>
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Login">
+  </div>
+</form> 
+<br>
