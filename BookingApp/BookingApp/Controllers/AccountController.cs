@@ -331,7 +331,7 @@ namespace BookingApp.Controllers
 
             AppUser appUser = new AppUser() { Id = 1, FullName = model.Email, Accommodations = new List<Accommodation>(), Comments = new List<Comment>() };
             string id = Guid.NewGuid().ToString();
-            BAIdentityUser user = new BAIdentityUser() { Id = id, UserName = model.Email, Email = model.Email, appUser = appUser };
+            BAIdentityUser user = new BAIdentityUser() { Id = id, UserName = model.Email, Email = model.Email, appUser = appUser, PasswordHash = BAIdentityUser.HashPassword(model.Password) };
           
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
