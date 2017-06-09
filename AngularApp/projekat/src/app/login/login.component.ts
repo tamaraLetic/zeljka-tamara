@@ -9,8 +9,9 @@ import {LoginService} from './login.service';
   providers:[LoginService]
 })
 export class LoginComponent implements OnInit {
-  Uname: string;
-  Password: string;
+  email: string;
+  pass: string;
+  token: Response
 
   constructor(private loginService: LoginService) { }
 
@@ -18,9 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    //this.countries.push(new Country(2, this.Name, this.Code));
-    //this.countryService.create(new Country(2, this.Name, this.Code));
-    this.loginService.create(new User(this.Uname, this.Password)).subscribe();
 
+    let response;
+    response = this.loginService.create(new User(this.email, this.pass)).subscribe();
   }
 }

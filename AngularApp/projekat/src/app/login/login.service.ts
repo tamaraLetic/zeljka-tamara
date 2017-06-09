@@ -12,10 +12,10 @@ export class LoginService{
     create(user: User): Observable<Response>
     {
         let heade=new Headers();
-        heade.append('Content-type', 'x-www-form-urlencoded');
+        heade.append('Content-type', 'application/x-www-form-urlencoded');
         let opts=new RequestOptions();
         opts.headers=heade;
         let data = `Username=${user.email}&Password=${user.password}&Grant_type=password`;
-        return this.http.post(`http://localhost:54042/oauth/token/`, data, opts);
+        return this.http.post(`http://localhost:54042/oauth/token`, data, opts);
     }
 }
