@@ -8,6 +8,8 @@ import { CountryListComponent } from './country-list/country-list.component';
 import { CountryComponent } from './country/country.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { RegisterAppuserComponent } from './register-appuser/register-appuser.component';
+import { RegisterManagerComponent } from './register-manager/register-manager.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { UserComponent } from './user/user.component';
     CountryListComponent,
     CountryComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    RegisterAppuserComponent,
+    RegisterManagerComponent
   ],
   imports: [
     BrowserModule,

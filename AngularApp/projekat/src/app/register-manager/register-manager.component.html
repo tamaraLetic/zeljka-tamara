@@ -1,0 +1,37 @@
+<h1>
+  Register manager input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="email">Email:</label><br>
+      <input type="text" id="email" name="email" value="" [(ngModel)]="email">
+    </div>
+ 
+  <br>
+  <div>
+      <label for="pass">Password:</label><br> 
+      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass">
+  </div>
+
+  <br>
+  <div>
+      <label for="conPass">Confirm password:</label><br> 
+      <input type="text" id="conPass" name="conPass" value="" [(ngModel)]="conPass">
+  </div>
+
+  <br>
+  <div>
+      <label for="name">Name:</label><br> 
+      <input type="text" id="name" name="name" value="" [(ngModel)]="name">
+  </div>
+
+  <br>
+  <div>
+      <label for="surname">Surname:</label><br> 
+      <input type="text" id="surname" name="surname" value="" [(ngModel)]="surname">
+  </div>
+  <br><br>
+  <div>
+      <input type="submit" value="Register">
+  </div>
+</form> 

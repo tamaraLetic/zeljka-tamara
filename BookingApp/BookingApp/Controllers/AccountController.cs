@@ -74,6 +74,7 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
+
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
@@ -328,14 +329,18 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
-
+            AppUser appUser = new AppUser() { Id = 1, FullName = model.Email, Accommodations = new List<Accommodation>(), Comments = new List<Comment>() };
+            string id = Guid.NewGuid().ToString();
+            BAIdentityUser user = new BAIdentityUser() { Id = id, UserName = model.Email, Email = model.Email, appUser = appUser };
+          
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
+
+            UserManager.AddToRole(user.Id, model.Role);
 
             return Ok();
         }

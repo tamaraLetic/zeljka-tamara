@@ -8,7 +8,7 @@ namespace BookingApp.Models
     public class AppUser
     {
         public int Id { get; set; }
-        public int FullName { get; set; }
+        public string FullName { get; set; }
 
         public List<Comment> Comments { get; set; }
 
