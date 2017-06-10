@@ -14,11 +14,13 @@ import { RegisterManagerComponent } from './register-manager/register-manager.co
 
 import { AuthService } from './auth.service';
 
-import { LoggedInGuard } from './logged-in.guard'
+import { LoggedInGuard } from './logged-in.guard';
+import { HomeComponent } from './home/home.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
   {path: "countryList", component: CountryListComponent},
+  {path: "home", component: HomeComponent}
 ]
 
 @NgModule({
@@ -29,7 +31,8 @@ const Routes = [
     LoginComponent,
     UserComponent,
     RegisterAppuserComponent,
-    RegisterManagerComponent
+    RegisterManagerComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

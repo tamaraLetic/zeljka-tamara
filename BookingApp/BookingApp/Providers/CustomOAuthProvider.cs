@@ -34,6 +34,9 @@ namespace BookingApp.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
+            var roleHeader = "Role";
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { roleHeader });
+
             ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             BAIdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
