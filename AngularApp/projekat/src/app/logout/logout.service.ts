@@ -11,13 +11,15 @@ export class LogoutService{
 
     logout(): Observable<Response>
     {
+        let token = localStorage.getItem("token");
+
         let header = new Headers();
         header.append('Content-type', 'application/x-www-form-urlencoded');
-        header.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
 
         let opts = new RequestOptions();
         opts.headers = header;
-        console.log(localStorage.getItem("token"));
+        console.log( JSON.parse(token).token);
         let ret = this.http.post(`http://localhost:54042/api/Account/Logout`, "", opts);
         localStorage.removeItem("token");
 

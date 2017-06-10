@@ -15,8 +15,7 @@ export class LogoutComponent implements OnInit {
   constructor(private logoutService: LogoutService, private authService: AuthService,private router: Router) { }
 
   ngOnInit() {
+    this.logoutService.logout().subscribe(x => this.router.navigate(['/login'])); 
   }
-  onSubmit(){  
-    this.logoutService.logout().subscribe(/*x => {this.authService.logOut(x); this.router.navigate(['/home'])}*/); 
-  }
+ 
 }
