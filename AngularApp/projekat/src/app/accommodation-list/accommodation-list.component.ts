@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { Accommodation } from '../accommodation/accommodation.model';
 import {AccommodationService} from './accommodation-list.service';
 
@@ -46,19 +45,5 @@ export class AccommodationListComponent implements OnInit {
     this.accService.delete(id).subscribe();
     this.accService.getAll().subscribe(res => this.accomodations = res.json());
   }
-=======
 
-@Component({
-  selector: 'app-accommodation-list',
-  templateUrl: './accommodation-list.component.html',
-  styleUrls: ['./accommodation-list.component.css']
-})
-export class AccommodationListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
->>>>>>> 10c14769549929a9acc597d92844652695795a88
 }

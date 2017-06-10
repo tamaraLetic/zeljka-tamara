@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Region} from '../region/region.model';
 import {Country} from '../country/country.model';
@@ -45,20 +45,5 @@ export class RegionListComponent implements OnInit {
     console.log("delete");
     this.regionService.delete(id);
   }
-=======
-import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-region-list',
-  templateUrl: './region-list.component.html',
-  styleUrls: ['./region-list.component.css']
-})
-export class RegionListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
->>>>>>> 10c14769549929a9acc597d92844652695795a88
 }
