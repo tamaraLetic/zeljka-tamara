@@ -15,7 +15,7 @@
     <a class="tablinks" [routerLink]="['/register']">Register</a>
  </div>
   <div *ngIf="isLoggedIn()">
-      <a class="tablinks" >Logout</a>
+      <a class="tablinks" [routerLink]="['/logout']">Logout</a>
   </div>
 </div>
 
