@@ -4,6 +4,14 @@
     Welcome to {{title}}!!
   </h1>
 </div>
-<register-appuser></register-appuser>
+<!--<register-appuser></register-appuser>-->
+
+
+<div class="tab">
+  <!--<button class="tablinks" onclick="">Login</button>-->
+  <a class="tablinks" [routerLink]="['/login']">Login</a>
+  <!--<button class="tablinks" onclick="">Register</button>-->
+  <a class="tablinks" [routerLink]="['/register']">Register</a>
+</div>
 
 <router-outlet></router-outlet>

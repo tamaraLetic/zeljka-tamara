@@ -14,7 +14,7 @@ constructor(private authService: AuthService){
   }
 
   logIn(){
-    this.authService.logIn();
+    //this.authService.logIn();
   }
 
   logOut(){
