@@ -37,7 +37,8 @@ const Routes = [
   {path: "countryList", component: CountryListComponent},
   {path: "home", component: HomeComponent} ,
   {path: "register", component: RegisterAppuserComponent},
-  {path: "logout", component: LogoutComponent}
+  {path: "logout", component: LogoutComponent},
+  {path: "region", component: RegionComponent}
 ]
 
 @NgModule({
