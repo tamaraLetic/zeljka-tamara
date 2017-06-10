@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'app';
+  user =this.isLoggedIn();
 
 
 constructor(private authService: AuthService){

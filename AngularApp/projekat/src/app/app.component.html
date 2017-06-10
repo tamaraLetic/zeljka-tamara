@@ -8,10 +8,16 @@
 
 
 <div class="tab">
-  <!--<button class="tablinks" onclick="">Login</button>-->
-  <a class="tablinks" [routerLink]="['/login']">Login</a>
-  <!--<button class="tablinks" onclick="">Register</button>-->
-  <a class="tablinks" [routerLink]="['/register']">Register</a>
+ 
+ <div *ngIf="!isLoggedIn()" >
+    <a class="tablinks" [routerLink]="['/login']">Login</a>
+  
+    <a class="tablinks" [routerLink]="['/register']">Register</a>
+ </div>
+  <div *ngIf="isLoggedIn()">
+      <a class="tablinks" >Logout</a>
+  </div>
 </div>
+
 
 <router-outlet></router-outlet>
