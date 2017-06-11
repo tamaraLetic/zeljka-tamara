@@ -18,8 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    //this.countries.push(new Country(2, this.Name, this.Code));
-    //this.countryService.create(new Country(2, this.Name, this.Code));
     this.loginService.create(new User(this.Uname, this.Password)).subscribe();
 
   }
