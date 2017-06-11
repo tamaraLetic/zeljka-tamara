@@ -4,6 +4,23 @@
     Welcome to {{title}}!!
   </h1>
 </div>
-<login></login>
+<!--<register-appuser></register-appuser>-->
 
 
+<div class="tab">
+ 
+ <div *ngIf="!isLoggedIn()" >
+    <a class="tablinks" [routerLink]="['/login']">Login</a>
+  
+    <a class="tablinks" [routerLink]="['/register']">Register</a>
+ </div>
+  <div *ngIf="isLoggedIn()">
+      <a class="tablinks" [routerLink]="['/logout']">Logout</a>
+  </div>
+   <div *ngIf="isLoggedIn()">
+      <a class="tablinks" [routerLink]="['/region']">Region</a>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
