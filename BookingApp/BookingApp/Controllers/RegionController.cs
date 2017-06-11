@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -24,6 +25,7 @@ namespace BookingApp.Controllers
             return db.Regions;
         }
 
+        [EnableQuery]
         [HttpGet]
         [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]
@@ -38,6 +40,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
+        [EnableQuery]
         [Authorize]
         [HttpPut]
         [Route("Regions/{id}")]
@@ -89,10 +92,10 @@ namespace BookingApp.Controllers
             db.Regions.Add(region);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new {conroller = "Region",  id = region.Id }, region);
+            return CreatedAtRoute("DefaultApi", new {controller = "Region",  id = region.Id }, region);
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpDelete]
         [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]

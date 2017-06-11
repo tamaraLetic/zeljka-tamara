@@ -19,6 +19,7 @@ export class RegionListComponent implements OnInit {
   Id: number;
   Countries: Country [];
   SelectedCountry: Country;
+  
 
   @Output()select: EventEmitter<string>;
 
@@ -37,13 +38,27 @@ export class RegionListComponent implements OnInit {
 
   onSubmit(){
 
-    this.regionService.create(new Region(1, this.Name, this.SelectedCountry)).subscribe(res => this.regions.push(res.json()));
+    this.regionService.create(new Region(1, this.Name, this.SelectedCountry.Id)).subscribe(res => this.regions.push(res.json()));
   }
 
   deleteRegion(id: number){
 
-    console.log("delete");
-    this.regionService.delete(id);
+    this.regionService.delete(id).subscribe();
+    this.regionService.getAll().subscribe(res => this.regions = res.json());
+  }
+
+  hasRight(): boolean{
+
+    let token = localStorage.getItem("token");
+    let role = JSON.parse(token).role;
+    let auth = false;
+
+    if (role=="Admin")
+    {
+      auth = true;
+    }
+
+    return auth;
   }
 
 }

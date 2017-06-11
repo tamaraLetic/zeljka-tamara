@@ -26,10 +26,11 @@ namespace BookingApp.Models
         [Range(0, float.MaxValue)]
         public float PricePerNight { get; set; }
 
+        [Required]
         [ForeignKey("Accommodation")]
         public int AccommodationId { get; set; }
 
-        [Required]
+       
         public Accommodation Accommodation { get; set; }
     }
 }

@@ -1,0 +1,15 @@
+<h1>
+  Region edit form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="region.Name">Name:</label><br>
+      <input type="text" id="region.Name" name="region.Name" [(ngModel)]="region.Name"> 
+    </div>
+    <br>
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 

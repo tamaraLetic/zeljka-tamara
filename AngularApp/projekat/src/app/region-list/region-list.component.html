@@ -33,8 +33,8 @@
         </thead>
       <tbody>
             <tr *ngFor="let c of regions"><region [region]="c"></region>
-            <td><a ng-click="editRegion(region.id)">edit</a></td>
-            <td><button ng-click="deleteRegion()">delete</button></td>
+            <td><button *ngIf="hasRight()" [routerLink]= "['/editRegion/', c.Id]">edit</button></td>
+            <td><button *ngIf="hasRight()" (click)="deleteRegion(c.Id)">delete</button></td>
             </tr>
         </tbody>
     </table>

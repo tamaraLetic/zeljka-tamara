@@ -15,6 +15,8 @@ import { RegisterManagerComponent } from './register-manager/register-manager.co
 import { AuthService } from './auth.service';
 
 import { LoggedInGuard } from './logged-in.guard';
+import { AdminGuard } from './admin.guard';
+
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccommodationComponent } from './accommodation/accommodation.component';
@@ -30,15 +32,17 @@ import { RegionListComponent } from './region-list/region-list.component';
 import { RoomComponent } from './room/room.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { RoomReservationsComponent } from './room-reservations/room-reservations.component';
-import { RoomReservationsListComponent } from './room-reservations-list/room-reservations-list.component'
+import { RoomReservationsListComponent } from './room-reservations-list/room-reservations-list.component';
+import { EditRegionComponent } from './edit-region/edit-region.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
-  {path: "countryList", component: CountryListComponent},
+  {path: "countryList", component: CountryListComponent, LoggedInGuard},
   {path: "home", component: HomeComponent} ,
   {path: "register", component: RegisterAppuserComponent},
   {path: "logout", component: LogoutComponent},
-  {path: "region", component: RegionComponent}
+  {path: "region", component: RegionListComponent},
+  {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard}
 ]
 
 @NgModule({
@@ -65,7 +69,8 @@ const Routes = [
     RoomComponent,
     RoomListComponent,
     RoomReservationsComponent,
-    RoomReservationsListComponent
+    RoomReservationsListComponent,
+    EditRegionComponent
   ],
   imports: [
     BrowserModule,

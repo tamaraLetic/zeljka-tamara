@@ -36,25 +36,27 @@ namespace BookingApp.Models
         [Required]
         public bool Approved { get; set; }
 
+        [Required]
         [ForeignKey("Place")]
         public int PlaceId { get; set; }
 
-        [Required]
+        
         public Place Place { get; set; }
 
+        [Required]
         [ForeignKey("AccommodationType")]
         public int AccommodationTypeId { get; set; }
 
-        [Required]
+        
         public AccommodationType AccommodationType { get; set; }
 
         public List<Room> Rooms { get; set; }
         public List<Comment> Comments { get; set; }
 
+        [Required]
         [ForeignKey("AppUser")]
         public int AppUserId { get; set; }
-
-        [Required]
+      
         public AppUser AppUser { get; set; }
 
     }

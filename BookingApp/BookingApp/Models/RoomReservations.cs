@@ -20,18 +20,18 @@ namespace BookingApp.Models
         [Timestamp]
         public byte[] TimeStamp { get; set; }
 
-        
+        [Required]
         [ForeignKey("AppUser")]
         public int AppUserId { get; set; }
 
-        [Required]
+        
         public AppUser AppUser { get; set; }
 
-        
+        [Required]
         [ForeignKey("Room")]
         public int RoomId { get; set; }
 
-        [Required]
+        
         public Room Room { get; set; }
     }
 }

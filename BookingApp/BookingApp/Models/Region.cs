@@ -16,10 +16,11 @@ namespace BookingApp.Models
         [StringLength(200)]
         public string Name { get; set; }
 
+        [Required]
         [ForeignKey("Country")]
         public int CountryId { get; set; }
 
-        [Required]
+        
         public Country Country { get; set; }
 
         public List<Place> Places { get; set; }

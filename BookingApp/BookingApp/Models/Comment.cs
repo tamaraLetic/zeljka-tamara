@@ -16,20 +16,22 @@ namespace BookingApp.Models
         [StringLength(1000)]
         public string Text { get; set; }
 
+        [Required]
         [Key]
         [Column(Order = 1)]
         [ForeignKey("AppUser")]       
         public int AppUserId { get; set; }
 
-        [Required]
+        
         public AppUser AppUser { get; set; }
 
+        [Required]
         [Key]
         [Column(Order = 2)]
         [ForeignKey("Accommodation")]
         public int AccommodationId { get; set; }
 
-        [Required]
+        
         public Accommodation Accommodation { get; set; }
     }
 }

@@ -38,5 +38,19 @@ export class AuthService{
         else
             return false;
     }
+
+    isAdmin(): boolean{
+
+        let token = localStorage.getItem("token");
+        let role = JSON.parse(token).role;
+        let auth = false;
+
+        if (role=="Admin")
+        {
+            auth = true;
+        }
+
+        return auth;
+    }
     
 }
