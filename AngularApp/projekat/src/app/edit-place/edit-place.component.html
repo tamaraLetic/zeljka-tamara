@@ -1,0 +1,15 @@
+<h1>
+  Place edit form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="place.Name">Name:</label><br>
+      <input type="text" id="place.Name" name="place.Name" [(ngModel)]="place.Name"> 
+    </div>
+    <br>
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 

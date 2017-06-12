@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../accommodation/accommodation.model';
+import { Place } from '../place/place.model';
+//import { AccommodationType } from '../accommodation-type/accommodation-type.model';
 import {AccommodationService} from './accommodation-list.service';
 
 @Component({
@@ -19,6 +21,8 @@ export class AccommodationListComponent implements OnInit {
   Longitude: number;
   ImageURL: string;
   Approved: boolean;
+  SelectedPlace: Place;
+  //SelectedAccType: AccommodationType;
 
    constructor(private accService: AccommodationService) { 
 
@@ -32,18 +36,36 @@ export class AccommodationListComponent implements OnInit {
 
   onSubmit(){
 
-    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false)).subscribe(res => this.accomodations.push(res.json()));
+   // this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id)).subscribe(res => this.accomodations.push(res.json()));
   }
 
-  editAccommodation(id: number){
+  delete(id: number){
 
     
+    this.accService.delete(id).subscribe(res => this.accomodations.splice(this.findIndex(res.json() as Accommodation),1));
   }
 
-  deleteAccommodation(id: number){
+  hasRight(): boolean{
 
-    this.accService.delete(id).subscribe();
-    this.accService.getAll().subscribe(res => this.accomodations = res.json());
+    let token = localStorage.getItem("token");
+    let role = JSON.parse(token).role;
+    let auth = false;
+
+    if (role=="Manager")
+    {
+      auth = true;
+    }
+
+    return auth;
+  }
+
+  findIndex(acc: Accommodation): number{
+    for(let i =0; i<=this.accomodations.length; i++){
+      if(this.accomodations[i].Id==acc.Id){
+        return i;
+      }
+    }
+    return -1;
   }
 
 }

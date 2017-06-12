@@ -8,7 +8,7 @@ export class Country {
         this.Name=name;
         this.Code=code;
     }*/
-    constructor (public Id:number, public Name: string, public Code:string){
+    constructor (public Id?:number, public Name?: string, public Code?:string){
         
     }
 }

@@ -16,6 +16,7 @@ import { AuthService } from './auth.service';
 
 import { LoggedInGuard } from './logged-in.guard';
 import { AdminGuard } from './admin.guard';
+import { ManagerGuard } from './manager.guard';
 
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -34,7 +35,9 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomReservationsComponent } from './room-reservations/room-reservations.component';
 import { RoomReservationsListComponent } from './room-reservations-list/room-reservations-list.component';
 import { EditRegionComponent } from './edit-region/edit-region.component';
-import { EditCountryComponent } from './edit-country/edit-country.component'
+import { EditCountryComponent } from './edit-country/edit-country.component';
+import { EditPlaceComponent } from './edit-place/edit-place.component';
+import { EditAccommodationComponent } from './edit-accommodation/edit-accommodation.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -43,7 +46,13 @@ const Routes = [
   {path: "register", component: RegisterAppuserComponent},
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent},
-  {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard}
+  {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
+  {path: "country", component: CountryListComponent},
+  {path: "editCountry/:Id", component: EditCountryComponent, AdminGuard},
+  {path: "place", component: PlaceListComponent},
+  {path: "editPlace/:Id", component: EditPlaceComponent, AdminGuard},
+  {path: "accommodation", component: AccommodationListComponent},
+  {path: "editAccommodation/:Id", component: EditAccommodationComponent, ManagerGuard}
 ]
 
 @NgModule({
@@ -72,7 +81,9 @@ const Routes = [
     RoomReservationsComponent,
     RoomReservationsListComponent,
     EditRegionComponent,
-    EditCountryComponent
+    EditCountryComponent,
+    EditPlaceComponent,
+    EditAccommodationComponent
   ],
   imports: [
     BrowserModule,

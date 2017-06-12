@@ -1,3 +1,33 @@
-<p>
-  place-list works!
-</p>
+
+<h1>
+  Place input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="name">Name:</label><br>
+      <input type="text" id="Name" name="name" value="" [(ngModel)]="name">
+    </div>
+    <br>
+    <div>
+      <label for="Region">Region:</label><br>
+       <select [(ngModel)]="selectedRegion" name="selectedRegion">
+                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+            </select>
+
+    </div>
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
+
+<br><br>
+<div >
+  <ul>
+    <li *ngFor="let c of places" >
+      <place [place]="c"></place>
+      <button *ngIf="hasRight()" [routerLink]= "['/editPlace/', c.Id]">edit</button>
+      <button *ngIf="hasRight()" (click)="deletePlace(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>

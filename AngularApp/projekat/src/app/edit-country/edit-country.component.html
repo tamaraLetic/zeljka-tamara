@@ -1,3 +1,21 @@
-<p>
-  edit-country works!
-</p>
+<h1>
+  Country edit
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      
+      <label for="country.Name">Name:</label><br>
+      <input type="text" id="country.Name" name="country.Name" [(ngModel)] ="country.Name">
+    </div>
+ 
+  <br>
+  <div>
+      <label for="country.Code">Code:</label><br> 
+      <input type="text" id="country.Code" name="country.Code" [(ngModel)] ="country.Code">
+  </div>
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 

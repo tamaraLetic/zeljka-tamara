@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <h1>
   Accommodation input form
 </h1>
@@ -37,6 +37,20 @@
       <label for="image">Image:</label><br> 
       <input type="text" id="image" name="image" value="" [(ngModel)]="ImageURL">
   </div>
+  <div>
+      <label for="Region">Place:</label><br>
+       <select [(ngModel)]="selectedRegion" name="selectedRegion">
+                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+            </select>
+
+    </div>
+    <div>
+      <label for="Region">Accommodation type:</label><br>
+       <select [(ngModel)]="selectedRegion" name="selectedRegion">
+                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+            </select>
+
+    </div>
 
    
   <br><br>
@@ -45,33 +59,13 @@
   </div>
 </form> 
 
-
-<div class="span6">
-    <table class="table table-striped table-condensed">
-        <thead>
-        <tr>
-            <th style="min-width: 80px;">Name</th>
-            <th style="min-width: 80px;">Description</th>
-            <th style="min-width: 80px;">Address</th>
-            <th style="min-width: 80px;">AvargeGrade</th>
-            <th style="width:20px;"> </th>
-            <th style="width:20px;"> </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="a in accommodations">
-            <td>{{ a.Name }}</td>
-            <td>{{ a.Description }}</td>
-            <td>{{ a.Address }}</td>
-            <td>{{ a.AvargeGrade }}</td>
-            <td><a ng-click="editAccommodation(a.id)" class="ui positive right floated button">Edit</a></td>
-            <td><a ng-click="deleteAccommodation(a.id)" class="btn btn-small btn-danger">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+<div >
+  <ul>
+    <li *ngFor="let c of accommodations" >
+      <accommodation [accommodation]="c"></accommodation>
+      <button *ngIf="hasRight()" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
+      <button *ngIf="hasRight()" (click)="delete(c.Id)">delete</button>
+    </li>
+  </ul>
 </div>
-=======
-<p>
-  accommodation-list works!
-</p>
->>>>>>> 10c14769549929a9acc597d92844652695795a88
+

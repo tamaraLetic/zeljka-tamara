@@ -30,12 +30,23 @@ export class AccommodationService{
         return this.http.post(`http://localhost:${PortService.portNumber}/api/accommodations`, JSON.stringify(acc), opts);
     }
 
-    update(){}
-
-    delete(id: number): Observable<Response> {
+    update(acc: Accommodation): Observable<Response>{
 
         let header = new Headers();
+        let token = localStorage.getItem("token");
         header.append('Content-type', 'application/json');
+        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
+        let opts = new RequestOptions();
+        opts.headers = header;
+        return this.http.put(`http://localhost:${PortService.portNumber}/api/accommodations/${acc.Id}`, acc, opts);
+      }
+
+    delete(id: number): Observable<Response>{
+
+        let header = new Headers();
+        let token = localStorage.getItem("token");
+       
+        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
         let opts = new RequestOptions();
         opts.headers = header;
         return this.http.delete(`http://localhost:${PortService.portNumber}/api/accommodations/${id}`, opts);

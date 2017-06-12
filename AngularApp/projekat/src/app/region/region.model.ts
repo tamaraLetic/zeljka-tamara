@@ -1,4 +1,3 @@
-import {Country} from '../country/country.model'
 
 export class Region{
 
