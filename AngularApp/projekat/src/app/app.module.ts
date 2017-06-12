@@ -34,7 +34,8 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomReservationsComponent } from './room-reservations/room-reservations.component';
 import { RoomReservationsListComponent } from './room-reservations-list/room-reservations-list.component';
 import { EditRegionComponent } from './edit-region/edit-region.component';
-import { EditCountryComponent } from './edit-country/edit-country.component'
+import { EditCountryComponent } from './edit-country/edit-country.component';
+import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-accommodation-type.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -43,7 +44,9 @@ const Routes = [
   {path: "register", component: RegisterAppuserComponent},
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent},
-  {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard}
+  {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
+  {path: "editAccommodationType/:Id", component: EditAccommodationTypeComponent},
+  {path: "accommodationType", component: AccommodationTypeListComponent}
 ]
 
 @NgModule({
@@ -72,7 +75,8 @@ const Routes = [
     RoomReservationsComponent,
     RoomReservationsListComponent,
     EditRegionComponent,
-    EditCountryComponent
+    EditCountryComponent,
+    EditAccommodationTypeComponent
   ],
   imports: [
     BrowserModule,
