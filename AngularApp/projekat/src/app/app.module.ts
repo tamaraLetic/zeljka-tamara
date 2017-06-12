@@ -33,7 +33,8 @@ import { RoomComponent } from './room/room.component';
 import { RoomListComponent } from './room-list/room-list.component';
 import { RoomReservationsComponent } from './room-reservations/room-reservations.component';
 import { RoomReservationsListComponent } from './room-reservations-list/room-reservations-list.component';
-import { EditRegionComponent } from './edit-region/edit-region.component'
+import { EditRegionComponent } from './edit-region/edit-region.component';
+import { EditCountryComponent } from './edit-country/edit-country.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -70,7 +71,8 @@ const Routes = [
     RoomListComponent,
     RoomReservationsComponent,
     RoomReservationsListComponent,
-    EditRegionComponent
+    EditRegionComponent,
+    EditCountryComponent
   ],
   imports: [
     BrowserModule,

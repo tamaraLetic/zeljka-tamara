@@ -33,6 +33,6 @@ export class EditRegionComponent implements OnInit {
   
   onSubmit(){
 
-    this.RegionService.update(this.region).subscribe(x => this.router.navigate(['/region']));
+      this.RegionService.update(this.region).subscribe(x => this.router.navigate(['/region']));
   }
 }

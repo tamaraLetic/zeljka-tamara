@@ -43,8 +43,8 @@ export class RegionListComponent implements OnInit {
 
   deleteRegion(id: number){
 
-    this.regionService.delete(id).subscribe();
-    this.regionService.getAll().subscribe(res => this.regions = res.json());
+    
+    this.regionService.delete(id).subscribe(res => this.regions.splice(this.findIndex(res.json() as Region),1));
   }
 
   hasRight(): boolean{
@@ -61,4 +61,12 @@ export class RegionListComponent implements OnInit {
     return auth;
   }
 
+  findIndex(region: Region): number{
+    for(let i =0; i<=this.regions.length; i++){
+      if(this.regions[i].Id==region.Id){
+        return i;
+      }
+    }
+    return -1;
+  }
 }
