@@ -38,6 +38,7 @@ import { EditRegionComponent } from './edit-region/edit-region.component';
 import { EditCountryComponent } from './edit-country/edit-country.component';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
 import { EditAccommodationComponent } from './edit-accommodation/edit-accommodation.component'
+import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-accommodation-type.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -52,7 +53,9 @@ const Routes = [
   {path: "place", component: PlaceListComponent},
   {path: "editPlace/:Id", component: EditPlaceComponent, AdminGuard},
   {path: "accommodation", component: AccommodationListComponent},
-  {path: "editAccommodation/:Id", component: EditAccommodationComponent, ManagerGuard}
+  {path: "editAccommodation/:Id", component: EditAccommodationComponent, ManagerGuard},
+  {path: "editAccommodationType/:Id", component: EditAccommodationTypeComponent},
+  {path: "accommodationType", component: AccommodationTypeListComponent}
 ]
 
 @NgModule({
@@ -83,7 +86,8 @@ const Routes = [
     EditRegionComponent,
     EditCountryComponent,
     EditPlaceComponent,
-    EditAccommodationComponent
+    EditAccommodationComponent,
+    EditAccommodationTypeComponent
   ],
   imports: [
     BrowserModule,

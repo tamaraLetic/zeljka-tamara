@@ -1,0 +1,16 @@
+<h1>
+  Accommodation type edit form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+     
+      <label for="accommodationType.Name">Name:</label><br>
+      <input type="text" id="accommodationType.Name" name="accommodationType.Name" [(ngModel)]="accommodationType.Name"> 
+    </div>
+    <br>
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
