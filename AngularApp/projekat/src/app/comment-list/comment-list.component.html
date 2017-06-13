@@ -1,3 +1,38 @@
-<p>
-  comment-list works!
-</p>
+
+<h1>
+  Comment input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="text">Text:</label><br>
+      <input type="text" id="text" name="text" value="" [(ngModel)]="text">
+    </div>
+    <br>
+    <div> 
+      <label for="grade">Grade:</label><br>
+      <input type="grade" id="grade" name="grade" value="" [(ngModel)]="grade">
+    </div>
+    <br>
+    <div>
+     <label for="Accommodation">Accommodation:</label><br>
+       <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
+                <option *ngFor="let x of accommodations" [ngValue]="x" ><accommodation [accommodation]="x"></accommodation></option>
+            </select>
+
+    </div>
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
+
+<br><br>
+<div >
+  <ul>
+    <li *ngFor="let c of comments" >
+      <comment [comment]="c"></comment>
+      <!--<button *ngIf="hasRight()" [routerLink]= "['/editComment/', c.Id]">edit</button>-->
+      <button *ngIf="hasRight()" (click)="deleteComment(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>

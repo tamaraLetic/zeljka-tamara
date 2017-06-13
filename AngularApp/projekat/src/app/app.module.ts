@@ -39,7 +39,8 @@ import { EditRegionComponent } from './edit-region/edit-region.component';
 import { EditCountryComponent } from './edit-country/edit-country.component';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
 import { EditAccommodationComponent } from './edit-accommodation/edit-accommodation.component'
-import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-accommodation-type.component'
+import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-accommodation-type.component';
+import { EditRoomComponent } from './edit-room/edit-room.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -48,6 +49,8 @@ const Routes = [
   {path: "register", component: RegisterAppuserComponent},
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent},
+  {path: "room", component: RoomListComponent},
+  {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
   {path: "country", component: CountryListComponent},
   {path: "editCountry/:Id", component: EditCountryComponent, AdminGuard},
@@ -56,6 +59,7 @@ const Routes = [
   {path: "accommodation", component: AccommodationListComponent},
   {path: "editAccommodation/:Id", component: EditAccommodationComponent, ManagerGuard},
   {path: "editAccommodationType/:Id", component: EditAccommodationTypeComponent},
+  {path: "editRoom/:Id", component: EditRoomComponent},
   {path: "accommodationType", component: AccommodationTypeListComponent}
 ]
 
@@ -89,7 +93,8 @@ const Routes = [
     EditPlaceComponent,
     EditAccommodationComponent,
     EditAccommodationTypeComponent,
-   
+    EditRoomComponent
+
   ],
   imports: [
     BrowserModule,

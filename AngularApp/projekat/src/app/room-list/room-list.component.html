@@ -1,3 +1,45 @@
-<p>
-  room-list works!
-</p>
+
+<h1>
+  Room input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="roomNum">Room number:</label><br>
+      <input type="text" id="roomNum" name="roomNum" value="" [(ngModel)]="roomNum">
+    </div>
+      <div> 
+      <label for="bedCount">Bed count:</label><br>
+      <input type="text" id="bedCount" name="bedCount" value="" [(ngModel)]="bedCount">
+    </div>
+    <div> 
+      <label for="description">Description:</label><br>
+      <input type="text" id="description" name="description" value="" [(ngModel)]="description">
+    </div>
+    <div> 
+      <label for="pricePerNight">Price per night:</label><br>
+      <input type="text" id="pricePerNight" name="pricePerNight" value="" [(ngModel)]="pricePerNight">
+    </div>
+    <br>
+    <div>
+      <label for="Accommodation">Accommodation:</label><br>
+       <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
+                <option *ngFor="let x of accommodations" [ngValue]="x" ><accommodation [accommodation]="x"></accommodation></option>
+            </select>
+
+    </div>
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
+
+<br><br>
+<div >
+  <ul>
+    <li *ngFor="let c of rooms" >
+      <room [room]="c"></room>
+      <button *ngIf="hasRight()" [routerLink]= "['/editRoom/', c.Id]">edit</button>
+      <button *ngIf="hasRight()" (click)="deleteRoom(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>
