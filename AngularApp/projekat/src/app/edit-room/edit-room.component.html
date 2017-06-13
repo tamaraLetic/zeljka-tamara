@@ -1,0 +1,28 @@
+<h1>
+  Room edit form
+</h1>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="room.RoomNumber">RoomNumber:</label><br>
+    <input type="text" id="room.RoomNumber" name="room.RoomNumber" [(ngModel)]="room.RoomNumber">
+  </div>
+  <br>
+   <div>
+    <label for="room.BedCount">BedCount:</label><br>
+    <input type="text" id="room.BedCount" name="room.BedCount" [(ngModel)]="room.BedCount">
+  </div>
+   <br>
+   <div>
+    <label for="room.Description">Description:</label><br>
+    <input type="text" id="room.Description" name="room.Description" [(ngModel)]="room.Description">
+  </div>
+   <br>
+   <div>
+    <label for="room.PricePerNight">PricePerNight:</label><br>
+    <input type="text" id="room.PricePerNight" name="room.PricePerNight" [(ngModel)]="room.PricePerNight">
+  </div>
+   <br> <br>
+   <div>
+     <input type="submit" value="Submit">
+   </div>
+</form>
