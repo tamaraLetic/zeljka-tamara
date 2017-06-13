@@ -24,6 +24,7 @@ export class AccommodationService{
     create(acc: Accommodation): Observable<Response>
     {
         let header = new Headers();
+        let token = localStorage.getItem("token");
         header.append('Content-type', 'application/json');
         let opts = new RequestOptions();
         opts.headers = header;
