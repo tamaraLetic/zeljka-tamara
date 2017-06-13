@@ -19,11 +19,6 @@
   </div>
   <br>
   <div>
-      <label for="ag">Avarge Grade:</label><br> 
-      <input type="text" id="ag" name="ag" value="" [(ngModel)]="AvargeGrade">
-  </div>
-  <br>
-  <div>
       <label for="lat">Latitude:</label><br> 
       <input type="text" id="lat" name="desc" lat="" [(ngModel)]="Latitude">
   </div>
@@ -38,16 +33,18 @@
       <input type="text" id="image" name="image" value="" [(ngModel)]="ImageURL">
   </div>
   <div>
-      <label for="Region">Place:</label><br>
-       <select [(ngModel)]="selectedRegion" name="selectedRegion">
-                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+      <label for="places">Place:</label><br>
+       <select [(ngModel)]="SelectedPlace" name="SelectedPlace">
+                <option *ngFor="let x of places" [ngValue]="x" ><place [place]="x"></place></option>
             </select>
 
     </div>
     <div>
-      <label for="Region">Accommodation type:</label><br>
-       <select [(ngModel)]="selectedRegion" name="selectedRegion">
-                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+      <label for="accTypes">Accommodation type:</label><br>
+       <select [(ngModel)]="SelectedAccType" name="SelectedAccType">
+                <option *ngFor="let x of accTypes" [ngValue]="x" >
+                    <accommodation-type [accommodationType]="x"></accommodation-type>
+                </option>
             </select>
 
     </div>

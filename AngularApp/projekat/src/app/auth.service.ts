@@ -17,8 +17,9 @@ export class AuthService{
 
         let role = response.headers.get('Role');
         console.log(role);
-        let authdata = new AuthData(role, access_token);
-
+        let id = response.headers.get('Id');
+        let authdata = new AuthData(role, access_token, id);
+        console.log(id);
         console.log(response);
         console.log('role: ' + role);
 
@@ -33,10 +34,11 @@ export class AuthService{
     }
 
     isLoggedIn(): boolean{
-        if(localStorage.getItem("token") !== null)
-            return true;
-        else
+
+        if(!localStorage.getItem("token"))
             return false;
+        else
+            return true;
     }
 
     isAdmin(): boolean{

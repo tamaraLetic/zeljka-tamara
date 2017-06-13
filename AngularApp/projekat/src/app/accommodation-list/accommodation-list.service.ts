@@ -26,6 +26,7 @@ export class AccommodationService{
         let header = new Headers();
         let token = localStorage.getItem("token");
         header.append('Content-type', 'application/json');
+        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
         let opts = new RequestOptions();
         opts.headers = header;
         return this.http.post(`http://localhost:${PortService.portNumber}/api/accommodations`, JSON.stringify(acc), opts);

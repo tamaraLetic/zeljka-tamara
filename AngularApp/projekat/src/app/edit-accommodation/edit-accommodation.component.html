@@ -1,3 +1,39 @@
-<p>
-  edit-accommodation works!
-</p>
+
+<h1>
+  Accommodation edit
+  </h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="Name">Name:</label><br>
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name">
+    </div>
+  <br>
+  <div>
+      <label for="desc">Description:</label><br> 
+      <input type="text" id="desc" name="desc" value="" [(ngModel)]="Description">
+  </div>
+  <br>
+  <div>
+      <label for="address">Address:</label><br> 
+      <input type="text" id="address" name="address" value="" [(ngModel)]="Address">
+  </div>
+  <br>
+  <div>
+      <label for="image">Image:</label><br> 
+      <input type="text" id="image" name="image" value="" [(ngModel)]="ImageURL">
+  </div>
+    <div>
+      <label for="accTypes">Accommodation type:</label><br>
+       <select [(ngModel)]="SelectedAccType" name="SelectedAccType">
+            <option *ngFor="let x of accTypes" [ngValue]="x" >
+                <accommodation-type [accommodationType]="x"></accommodation-type>
+            </option>
+        </select>
+    </div>
+
+   
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
