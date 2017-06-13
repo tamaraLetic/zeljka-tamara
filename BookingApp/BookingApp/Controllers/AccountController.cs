@@ -345,6 +345,32 @@ namespace BookingApp.Controllers
             return Ok();
         }
 
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register/Manager")]
+        public async Task<IHttpActionResult> RegisterManager(RegisterBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            AppUser appUser = new AppUser() { Id = 1, FullName = model.Email, Accommodations = new List<Accommodation>(), Comments = new List<Comment>() };
+            string id = Guid.NewGuid().ToString();
+            BAIdentityUser user = new BAIdentityUser() { Id = id, UserName = model.Email, Email = model.Email, appUser = appUser, PasswordHash = BAIdentityUser.HashPassword(model.Password) };
+
+            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            UserManager.AddToRole(user.Id, model.Role);
+
+            return Ok();
+        }
+
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

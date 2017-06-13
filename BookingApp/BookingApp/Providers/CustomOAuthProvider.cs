@@ -31,11 +31,11 @@ namespace BookingApp.Providers
         {
 
             var allowedOrigin = "*";
-
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             var roleHeader = "Role";
-            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { roleHeader });
+            var idHeader = "Id";
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { roleHeader, idHeader });
 
             ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
@@ -74,6 +74,8 @@ namespace BookingApp.Providers
             //    context.SetError("invalid_grant", "AppUser did not confirm email.");
             //    return;
             //}
+
+            context.OwinContext.Response.Headers.Add("Id", new[] { user.appUserId.ToString() });
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
 
