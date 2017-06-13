@@ -4,21 +4,20 @@ import {Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {PortService} from '../port.service';
 
+
 @Injectable()
 export class AccommodationService{
 
-
     constructor(private http: Http){
-
     }
 
     getAll(): Observable<any>{
         return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations`); //prima url ka nasem serveru, vraca observable objekat
                
     }
-    getById(id: number){
+    getById(id: number):Observable<any>{
 
-        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations/${id}`);
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations/${id}`).map(res=>res.json());
     }
 
     create(acc: Accommodation): Observable<Response>

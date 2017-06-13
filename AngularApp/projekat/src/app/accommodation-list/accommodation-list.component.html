@@ -2,7 +2,7 @@
 <h1>
   Accommodation input form
 </h1>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
     <div> 
       <label for="Name">Name:</label><br>
       <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name">
@@ -32,6 +32,7 @@
       <label for="image">Image:</label><br> 
       <input type="text" id="image" name="image" value="" [(ngModel)]="ImageURL">
   </div>
+  <br>
   <div>
       <label for="places">Place:</label><br>
        <select [(ngModel)]="SelectedPlace" name="SelectedPlace">
@@ -39,6 +40,7 @@
             </select>
 
     </div>
+    <br>
     <div>
       <label for="accTypes">Accommodation type:</label><br>
        <select [(ngModel)]="SelectedAccType" name="SelectedAccType">
@@ -52,16 +54,23 @@
    
   <br><br>
   <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit">    
+      <input type="reset" value="Clear form" />
   </div>
 </form> 
 
-<div >
+<div>
   <ul>
     <li *ngFor="let c of accommodations" >
-      <accommodation [accommodation]="c"></accommodation>
-      <button *ngIf="hasRight()" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
-      <button *ngIf="hasRight()" (click)="delete(c.Id)">delete</button>
+      <accommodation [accommodation]="c"></accommodation>     
+      <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
+      <button *ngIf="hasRight(c.AppUserId)" (click)="delete(c.Id)">delete</button>
+      <div style="width:50%; margin: 0 auto">
+        <agm-map [latitude]="c.Latitude" [longitude]="c.Longitude" [zoom]="18">
+            <agm-marker [latitude]="c.Latitude" [longitude]="c.Longitude" [title]="c.Name">
+           </agm-marker>
+        </agm-map>
+      </div>
     </li>
   </ul>
 </div>

@@ -10,11 +10,12 @@ import {AccommodationService} from './accommodation-list.service';
   selector: 'accommodation-list',
   templateUrl: './accommodation-list.component.html',
   styleUrls: ['./accommodation-list.component.css'],
+  styles: ['agm-map {height: 300px; width: 500px;}'], //postavljamo sirinu i visinu mape
   providers:[AccommodationService,PlaceListService,AccommodationTypeListService] //dodali servis
 })
 export class AccommodationListComponent implements OnInit {
 
-  accomodations : Accommodation [];
+  accommodations : Accommodation [];
   Name: string;
   Description: string;
   Address: string;
@@ -30,14 +31,14 @@ export class AccommodationListComponent implements OnInit {
 
    constructor(private accService: AccommodationService, private placeService: PlaceListService, private accTypeService: AccommodationTypeListService) { 
 
-    this.accomodations = [];
+    this.accommodations = [];
     this.places = [];
     this.accTypes = [];
   }
 
   ngOnInit() {
 
-    this.accService.getAll().subscribe(res => this.accomodations = res.json());
+    this.accService.getAll().subscribe(res => this.accommodations = res.json());
     this.placeService.getAll().subscribe(res => this.places = res.json());
     this.accTypeService.getAll().subscribe(res => this.accTypes = res.json());
   }
@@ -46,23 +47,23 @@ export class AccommodationListComponent implements OnInit {
 
     let token = localStorage.getItem("token");
     let userID = JSON.parse(token).id;
-    console.log(+userID);
-    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID)).subscribe(res => this.accomodations.push(res.json()));
+    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID)).subscribe(res => this.accommodations.push(res.json()));
   }
 
   delete(id: number){
 
     
-    this.accService.delete(id).subscribe(res => this.accomodations.splice(this.findIndex(res.json() as Accommodation),1));
+    this.accService.delete(id).subscribe(res => this.accommodations.splice(this.findIndex(res.json() as Accommodation),1));
   }
 
-  hasRight(): boolean{
+  hasRight(id: number): boolean{
 
     let token = localStorage.getItem("token");
     let role = JSON.parse(token).role;
+    let userID = JSON.parse(token).id;
     let auth = false;
 
-    if (role=="Manager")
+    if (role == "Manager" && userID == id)
     {
       auth = true;
     }
@@ -71,8 +72,8 @@ export class AccommodationListComponent implements OnInit {
   }
 
   findIndex(acc: Accommodation): number{
-    for(let i =0; i<=this.accomodations.length; i++){
-      if(this.accomodations[i].Id==acc.Id){
+    for(let i =0; i<=this.accommodations.length; i++){
+      if(this.accommodations[i].Id==acc.Id){
         return i;
       }
     }
