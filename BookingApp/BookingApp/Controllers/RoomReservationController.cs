@@ -1,4 +1,7 @@
 ﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -15,8 +19,21 @@ namespace BookingApp.Controllers
     public class RoomReservationController : ApiController
     {
         private BAContext db = new BAContext();
+        private ApplicationUserManager _userManager;
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
+        [EnableQuery]
         [HttpGet]
         [Route("RoomReservations")]
         public IQueryable<RoomReservations> m1()
@@ -38,7 +55,7 @@ namespace BookingApp.Controllers
             return Ok(roomReservations);
         }
 
-        [Authorize]
+        [Authorize(Roles = "AppUser")]
         [HttpPut]
         [Route("RoomReservations/{id}")]
         [ResponseType(typeof(void))]
@@ -52,6 +69,20 @@ namespace BookingApp.Controllers
             if (id != roomReservations.Id)
             {
                 return BadRequest();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+           
+            if (!baUser.appUserId.Equals(roomReservations.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.Entry(roomReservations).State = EntityState.Modified;
@@ -92,7 +123,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { conroller = "RoomReservations", id = roomReservations.Id }, roomReservations);
         }
 
-        [Authorize]
+        [Authorize(Roles = "AppUser")]
         [HttpDelete]
         [Route("RoomReservations/{id}")]
         [ResponseType(typeof(RoomReservations))]
@@ -102,6 +133,20 @@ namespace BookingApp.Controllers
             if (roomReservations == null)
             {
                 return NotFound();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            if (!baUser.appUserId.Equals(roomReservations.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.RoomReservations.Remove(roomReservations);

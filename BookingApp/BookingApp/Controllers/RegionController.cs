@@ -17,7 +17,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-
+        [EnableQuery]
         [HttpGet]
         [Route("Regions")]
         public IQueryable<Region> m1()
@@ -25,7 +25,6 @@ namespace BookingApp.Controllers
             return db.Regions;
         }
 
-        [EnableQuery]
         [HttpGet]
         [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]
@@ -40,8 +39,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
-        [EnableQuery]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Regions/{id}")]
         [ResponseType(typeof(void))]
@@ -78,7 +76,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("Regions")]
         [ResponseType(typeof(Region))]
@@ -95,7 +93,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {controller = "Region",  id = region.Id }, region);
         }
 
-       // [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]

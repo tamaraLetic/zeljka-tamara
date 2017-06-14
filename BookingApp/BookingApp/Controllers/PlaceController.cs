@@ -1,4 +1,7 @@
 ﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -16,6 +20,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [EnableQuery]
         [HttpGet]
         [Route("Places")]
         public IQueryable<Place> m1()
@@ -37,7 +42,7 @@ namespace BookingApp.Controllers
             return Ok(place);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Places/{id}")]
         [ResponseType(typeof(void))]
@@ -74,7 +79,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("Places")]
         [ResponseType(typeof(Place))]
@@ -84,14 +89,14 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+                       
             db.Places.Add(place);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new {controller = "Place", id = place.Id }, place);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("Places/{id}")]
         [ResponseType(typeof(Place))]

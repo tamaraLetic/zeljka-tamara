@@ -20,15 +20,19 @@ export class AccommodationService{
         return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations/${id}`).map(res=>res.json());
     }
 
-    create(acc: Accommodation): Observable<Response>
+    create(acc: Accommodation, file: File): Observable<Response>
     {
-        let header = new Headers();
-        let token = localStorage.getItem("token");
-        header.append('Content-type', 'application/json');
-        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
-        let opts = new RequestOptions();
-        opts.headers = header;
-        return this.http.post(`http://localhost:${PortService.portNumber}/api/accommodations`, JSON.stringify(acc), opts);
+        let formData:FormData = new FormData();
+        formData.append('accommodation', JSON.stringify(acc));
+        formData.append('uploadFile', file, file.name);
+        console.log(formData);
+        let headers = new Headers();
+        headers.append('enctype', 'multipart/form-data');
+        
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        
+        return this.http.post(`http://localhost:${PortService.portNumber}/api/accommodations`, formData, options);
     }
 
     update(acc: Accommodation): Observable<Response>{
