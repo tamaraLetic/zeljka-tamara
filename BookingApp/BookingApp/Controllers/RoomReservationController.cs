@@ -106,7 +106,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize (Roles = "AppUser")]
         [HttpPost]
         [Route("RoomReservations")]
         [ResponseType(typeof(RoomReservations))]
