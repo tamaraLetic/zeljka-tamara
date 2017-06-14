@@ -4,17 +4,17 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div> 
       <label for="startDate">Start date:</label><br>
-      <input type="startDate" id="startDate" name="startDate" value="" [(ngModel)]="startDate">
+      <input type="date" id="startDate" name="startDate" value="" [(ngModel)]="startDate">
     </div>
     <br>
     <div> 
       <label for="endDate">End date:</label><br>
-      <input type="endDate" id="endDate" name="endDate" value="" [(ngModel)]="endDate">
+      <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate">
     </div>
     <br>
     <div>
      <label for="Rooms">Room:</label><br>
-       <select [(ngModel)]="selectedRoom" name="selectedRoom">
+       <select [(ngModel)]="selectedRooom" name="selectedRooom">
                 <option *ngFor="let x of rooms" [ngValue]="x" ><room [room]="x"></room></option>
             </select>
 
@@ -27,11 +27,11 @@
 
 <br><br>
 <div >
- <!-- <ul>
+  <ul>
     <li *ngFor="let c of roomReservationss" >
-      <roomReservations [roomReservations]="c"></roomReservations>
-      <!--<button *ngIf="hasRight()" [routerLink]= "['/editComment/', c.Id]">edit</button>
-      <button *ngIf="hasRight()" (click)="deleteRoomReservations(c.Id)">delete</button>
+      <room-reservations [roomReservations]="c"></room-reservations>
+      <button (click)="hasRight(c.Id)">right</button>
+      <button (click)="deleteRoomReservations(c.Id)">delete</button>
     </li>
-  </ul>-->
+  </ul>
 </div>
