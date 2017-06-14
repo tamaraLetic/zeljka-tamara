@@ -3,6 +3,7 @@ import {RoomReservations} from '../room-reservations/room-reservations.model';
 import {Room} from '../room/room.model';
 import {RoomListService} from '../room-list/room-list.service';
 import {RoomReservationsListService} from './room-reservations-list.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-room-reservations-list',
@@ -20,7 +21,7 @@ export class RoomReservationsListComponent implements OnInit {
 
   @Output()select: EventEmitter<string>;
 
-  constructor(private roomListService: RoomListService, private roomReservationsListService: RoomReservationsListService) { 
+  constructor(private router: Router,private roomListService: RoomListService, private roomReservationsListService: RoomReservationsListService) { 
     this.roomReservationss=[];
     this.rooms=[];
     this.select=new EventEmitter();
@@ -37,7 +38,7 @@ export class RoomReservationsListComponent implements OnInit {
     let userId=JSON.parse(token).id;
     console.log(userId);
     console.log("Room id: ", this.selectedRooom.Id);
-    this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate,false, this.selectedRooom.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
+    this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate,true, this.selectedRooom.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
  
   }
 
@@ -45,28 +46,29 @@ export class RoomReservationsListComponent implements OnInit {
     this.roomReservationsListService.delete(id).subscribe(res=>this.roomReservationss.splice(this.findIndex(res.json() as RoomReservations),1));
   }
 
-  hasRight(id:number): boolean{
+  cancelRoomReservations(rr:RoomReservations){
+    rr.Reserved=false;
+    this.roomReservationsListService.update(rr).subscribe(x=>this.router.navigate(['/roomReservations']));
+  /*  this.roomReservationsListService.getById(id).subscribe(x => {rr = x ;
+      rr.Reserved=false;
+      this.roomReservationsListService.update(rr).subscribe(x=>this.router.navigate(['/roomReservations']));
+      this.roomReservationss.
+    });*/
+  }
+
+  hasRight(id:number, reserved: boolean): boolean{
 
     let token = localStorage.getItem("token");
     let role = JSON.parse(token).role;
     let auth = false;
     let userId = JSON.parse(token).id;
-    console.log("Iz storage: ", userId);
-    let rr=new RoomReservations();
-    let userIdRoom=-1;
+   
 
-    //console.log(id);
-    this.roomReservationsListService.getById(id).subscribe(x => rr = x  );
-    userIdRoom=rr.AppUserId;
-    console.log("iz baze: ", rr.AppUserId);
-
-    if (role=="Manager")
-    {
-      if(userId==userIdRoom){
-          auth = true;
-      }
-      
+    if(role=="Manager" &&  userId==id){
+      auth=true;
     }
+
+    
 
     return auth;
   }

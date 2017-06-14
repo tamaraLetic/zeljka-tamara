@@ -30,8 +30,9 @@
   <ul>
     <li *ngFor="let c of roomReservationss" >
       <room-reservations [roomReservations]="c"></room-reservations>
-      <button (click)="hasRight(c.Id)">right</button>
-      <button (click)="deleteRoomReservations(c.Id)">delete</button>
+      <!--<button (click)="hasRight(c.Id)">right</button>-->
+      <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="cancelRoomReservations(c)">cancel</button>
+       <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="deleteRoomReservations(c.Id)">delete</button>
     </li>
   </ul>
 </div>
