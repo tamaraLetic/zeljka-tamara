@@ -25,4 +25,9 @@ constructor(private authService: AuthService){
   isLoggedIn() : boolean{
     return this.authService.isLoggedIn();
   }
+
+  isAdmin():boolean{
+
+    return this.authService.isAdmin();
+  }
 }

@@ -1,4 +1,7 @@
 ﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -15,7 +19,21 @@ namespace BookingApp.Controllers
     public class RoomController : ApiController
     {
         private BAContext db = new BAContext();
+        private ApplicationUserManager _userManager;
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [EnableQuery]
         [HttpGet]
         [Route("Rooms")]
         public IQueryable<Room> m1()
@@ -37,7 +55,7 @@ namespace BookingApp.Controllers
             return Ok(room);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Manager")]
         [HttpPut]
         [Route("Rooms/{id}")]
         [ResponseType(typeof(void))]
@@ -51,6 +69,22 @@ namespace BookingApp.Controllers
             if (id != room.Id)
             {
                 return BadRequest();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            Accommodation acc = db.Accommodations.FirstOrDefault(a => a.Id == room.AccommodationId);
+
+            if (!baUser.appUserId.Equals(acc.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.Entry(room).State = EntityState.Modified;
@@ -74,7 +108,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize (Roles = "Manager")]
         [HttpPost]
         [Route("Rooms")]
         [ResponseType(typeof(Room))]
@@ -84,7 +118,7 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+                        
             db.Rooms.Add(room);
             db.SaveChanges();
 
@@ -101,6 +135,22 @@ namespace BookingApp.Controllers
             if (room == null)
             {
                 return NotFound();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            Accommodation acc = db.Accommodations.FirstOrDefault(a => a.Id == room.AccommodationId);
+
+            if (!baUser.appUserId.Equals(acc.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.Rooms.Remove(room);

@@ -1,4 +1,7 @@
 ﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -15,8 +19,21 @@ namespace BookingApp.Controllers
     public class CommentController : ApiController
     {
         private BAContext db = new BAContext();
+        private ApplicationUserManager _userManager;
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
+        [EnableQuery]
         [HttpGet]
         [Route("Comments")]
         public IQueryable<Comment> m1()
@@ -38,7 +55,7 @@ namespace BookingApp.Controllers
             return Ok(comment);
         }
 
-        [Authorize]
+        [Authorize (Roles = "AppUser")]
         [HttpPut]
         [Route("Comments/{idUser}/{idAccommodation}")]
         [ResponseType(typeof(void))]
@@ -52,6 +69,28 @@ namespace BookingApp.Controllers
             if (idUser != comment.AppUserId || idAccommodation != comment.AccommodationId)
             {
                 return BadRequest();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            var userRole = baUser.Roles.FirstOrDefault().RoleId;
+            var roleName = db.Roles.FirstOrDefault(a => a.Id == userRole);
+
+            if (!roleName.Equals("AppUser"))
+            {
+                return Unauthorized();
+            }
+
+            if (!baUser.appUserId.Equals(comment.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.Entry(comment).State = EntityState.Modified;
@@ -75,7 +114,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize (Roles = "AppUser")]
         [HttpPost]
         [Route("Comments")]
         [ResponseType(typeof(Comment))]
@@ -92,7 +131,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {controller = "Comment", id = comment.AppUserId, id2 = comment.AccommodationId }, comment);
         }
 
-        [Authorize]
+        [Authorize (Roles = "AppUser")]
         [HttpDelete]
         [Route("Comments/{id}")]
         [ResponseType(typeof(Comment))]
@@ -102,6 +141,28 @@ namespace BookingApp.Controllers
             if (comment == null)
             {
                 return NotFound();
+            }
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            var userRole = baUser.Roles.FirstOrDefault().RoleId;
+            var roleName = db.Roles.FirstOrDefault(a => a.Id == userRole);
+
+            if (!roleName.Equals("AppUser"))
+            {
+                return Unauthorized();
+            }
+
+            if (!baUser.appUserId.Equals(comment.AppUserId))
+            {
+                return Unauthorized();
             }
 
             db.Comments.Remove(comment);

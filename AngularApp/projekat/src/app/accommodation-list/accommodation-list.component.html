@@ -30,7 +30,7 @@
   <br>
   <div>
       <label for="image">Image:</label><br> 
-      <input type="text" id="image" name="image" value="" [(ngModel)]="ImageURL">
+      <input  type="file" name="ImageURL" id="ImageURL" (change)="onChange($event)"/>
   </div>
   <br>
   <div>
@@ -70,6 +70,9 @@
             <agm-marker [latitude]="c.Latitude" [longitude]="c.Longitude" [title]="c.Name">
            </agm-marker>
         </agm-map>
+      </div>
+      <div>
+          <img  src="http://localhost:54042/{{c.ImageURL}}" style="width:304px;height:228px;">
       </div>
     </li>
   </ul>

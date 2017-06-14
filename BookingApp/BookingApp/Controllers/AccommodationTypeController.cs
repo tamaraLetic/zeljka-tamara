@@ -1,6 +1,4 @@
 ﻿using BookingApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -16,6 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [EnableQuery]
         [HttpGet]
         [Route("AccommodationTypes")]
         public IQueryable<AccommodationType> m1()
@@ -37,7 +37,7 @@ namespace BookingApp.Controllers
             return Ok(accomType);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(void))]
@@ -74,7 +74,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("AccommodationTypes")]
         [ResponseType(typeof(AccommodationType))]
@@ -91,7 +91,7 @@ namespace BookingApp.Controllers
             return CreatedAtRoute("DefaultApi", new {controller = "AccommodationType", id = accomType.Id }, accomType);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(AccommodationType))]

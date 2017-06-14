@@ -29,6 +29,8 @@ export class AccommodationListComponent implements OnInit {
   places: Place [];
   accTypes: AccommodationType [];
 
+  file: File;
+
    constructor(private accService: AccommodationService, private placeService: PlaceListService, private accTypeService: AccommodationTypeListService) { 
 
     this.accommodations = [];
@@ -38,7 +40,11 @@ export class AccommodationListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.accService.getAll().subscribe(res => this.accommodations = res.json());
+    this.accService.getAll().subscribe(res => 
+    {
+      this.accommodations = res.json();
+      
+    });
     this.placeService.getAll().subscribe(res => this.places = res.json());
     this.accTypeService.getAll().subscribe(res => this.accTypes = res.json());
   }
@@ -47,7 +53,7 @@ export class AccommodationListComponent implements OnInit {
 
     let token = localStorage.getItem("token");
     let userID = JSON.parse(token).id;
-    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID)).subscribe(res => this.accommodations.push(res.json()));
+    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID), this.file).subscribe(res => this.accommodations.push(res.json()));
   }
 
   delete(id: number){
@@ -79,5 +85,13 @@ export class AccommodationListComponent implements OnInit {
     }
     return -1;
   }
+
+  onChange(event: EventTarget) {
+        let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+        let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+        let files: FileList = target.files;
+        this.file = files[0];
+        console.log(this.file);
+    }
 
 }
