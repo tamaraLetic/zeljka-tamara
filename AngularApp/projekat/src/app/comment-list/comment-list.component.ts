@@ -41,7 +41,7 @@ export class CommentListComponent implements OnInit {
     this.commentListService.create(new Comment(1, this.grade, this.text, this.selectedAccommodation.Id, +userId)).subscribe(res => this.comments.push(res.json()));
   }
 
-  deletePlace(id: number){
+  deleteComment(id: number){
 
     
     this.commentListService.delete(id).subscribe(res => this.comments.splice(this.findIndex(res.json() as Comment),1));

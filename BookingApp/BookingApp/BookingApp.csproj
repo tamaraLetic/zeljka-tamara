@@ -348,6 +348,10 @@
     <Compile Include="Migrations\201706111308050_fix all required.Designer.cs">
       <DependentUpon>201706111308050_fix all required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706140709124_Added bool to RoomReservation.cs" />
+    <Compile Include="Migrations\201706140709124_Added bool to RoomReservation.Designer.cs">
+      <DependentUpon>201706140709124_Added bool to RoomReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -493,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706111308050_fix all required.resx">
       <DependentUpon>201706111308050_fix all required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706140709124_Added bool to RoomReservation.resx">
+      <DependentUpon>201706140709124_Added bool to RoomReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

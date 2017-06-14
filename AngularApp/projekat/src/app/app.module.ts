@@ -50,6 +50,7 @@ const Routes = [
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent},
   {path: "room", component: RoomListComponent},
+  {path: "roomReservations", component: RoomReservationsListComponent},
   {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
   {path: "country", component: CountryListComponent},

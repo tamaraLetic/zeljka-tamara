@@ -1,3 +1,37 @@
-<p>
-  room-reservations-list works!
-</p>
+<h1>
+  Room Reservations input form
+</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div> 
+      <label for="startDate">Start date:</label><br>
+      <input type="startDate" id="startDate" name="startDate" value="" [(ngModel)]="startDate">
+    </div>
+    <br>
+    <div> 
+      <label for="endDate">End date:</label><br>
+      <input type="endDate" id="endDate" name="endDate" value="" [(ngModel)]="endDate">
+    </div>
+    <br>
+    <div>
+     <label for="Rooms">Room:</label><br>
+       <select [(ngModel)]="selectedRoom" name="selectedRoom">
+                <option *ngFor="let x of rooms" [ngValue]="x" ><room [room]="x"></room></option>
+            </select>
+
+    </div>
+  <br><br>
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+</form> 
+
+<br><br>
+<div >
+ <!-- <ul>
+    <li *ngFor="let c of roomReservationss" >
+      <roomReservations [roomReservations]="c"></roomReservations>
+      <!--<button *ngIf="hasRight()" [routerLink]= "['/editComment/', c.Id]">edit</button>
+      <button *ngIf="hasRight()" (click)="deleteRoomReservations(c.Id)">delete</button>
+    </li>
+  </ul>-->
+</div>

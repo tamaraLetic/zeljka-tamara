@@ -17,6 +17,9 @@ namespace BookingApp.Models
         [Required]
         public DateTime EndDate { get; set; }
 
+        [Required]
+        public bool Reserved { get; set; }
+
         [Timestamp]
         public byte[] TimeStamp { get; set; }
 
