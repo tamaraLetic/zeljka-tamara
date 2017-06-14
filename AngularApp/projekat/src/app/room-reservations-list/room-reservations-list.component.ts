@@ -36,7 +36,8 @@ export class RoomReservationsListComponent implements OnInit {
     let token=localStorage.getItem("token");
     let userId=JSON.parse(token).id;
     console.log(userId);
-    this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate, this.selectedRooom.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
+    console.log("Room id: ", this.selectedRooom.Id);
+    this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate,false, this.selectedRooom.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
  
   }
 
@@ -44,15 +45,27 @@ export class RoomReservationsListComponent implements OnInit {
     this.roomReservationsListService.delete(id).subscribe(res=>this.roomReservationss.splice(this.findIndex(res.json() as RoomReservations),1));
   }
 
-  hasRight(): boolean{
+  hasRight(id:number): boolean{
 
     let token = localStorage.getItem("token");
     let role = JSON.parse(token).role;
     let auth = false;
+    let userId = JSON.parse(token).id;
+    console.log("Iz storage: ", userId);
+    let rr=new RoomReservations();
+    let userIdRoom=-1;
 
-    if (role=="Admin")
+    //console.log(id);
+    this.roomReservationsListService.getById(id).subscribe(x => rr = x  );
+    userIdRoom=rr.AppUserId;
+    console.log("iz baze: ", rr.AppUserId);
+
+    if (role=="Manager")
     {
-      auth = true;
+      if(userId==userIdRoom){
+          auth = true;
+      }
+      
     }
 
     return auth;

@@ -89,7 +89,7 @@ namespace BookingApp.Controllers
             db.RoomReservations.Add(roomReservations);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { conroller = "RoomReservations", id = roomReservations.Id }, roomReservations);
+            return CreatedAtRoute("DefaultApi", new { controller = "RoomReservations", id = roomReservations.Id }, roomReservations);
         }
 
         [Authorize]
