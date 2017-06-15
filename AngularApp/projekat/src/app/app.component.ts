@@ -30,4 +30,8 @@ constructor(private authService: AuthService){
 
     return this.authService.isAdmin();
   }
+   isManager():boolean{
+
+    return this.authService.isManager();
+  }
 }

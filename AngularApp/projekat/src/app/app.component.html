@@ -1,48 +1,64 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
+<div class="index-header" style="text-align:center;">
+  <h1  title="login" style="font-weight: bold;color: white;">
+    Tasa&Zeks Travel
   </h1>
 </div>
 
+<!--<register-appuser></register-appuser>-->
+<nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header" >
+            <img id="ctl00_XXX" src="http://localhost:4200/assets/images/logo.png"/> 
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active" *ngIf="!isLoggedIn()">			
+					<a class="tablinks" [routerLink]="['/login']">Login</a>					 
+			  </li>
+              	
+              <li *ngIf="!isLoggedIn()">
+                  <a class="tablinks" [routerLink]="['/register']">Register</a>
+            </li>
+              <li *ngIf="isLoggedIn()">
+				  <a class="tablinks" [routerLink]="['/logout']">Logout</a>			
+			  </li>
+              <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/region']">Region</a>
+			  </li>
+			  <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/country']">Country</a>
+              </li>
+			   <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/place']">Place</a>
+              </li>
+			   <li *ngIf="isLoggedIn() && isManager()">
+				  <a class="tablinks" [routerLink]="['/accommodation']">Accommodation</a>
+              </li>
+			   <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/accommodationType']">Accommodation type</a>
+              </li>
+			   <li *ngIf="isLoggedIn() && isManager()">
+				  <a class="tablinks" [routerLink]="['/room']">Room</a>
+              </li>
+			   <li *ngIf="isLoggedIn()">
+				  <a class="tablinks" [routerLink]="['/comment']">Comment</a>
+              </li>
+			   <li *ngIf="isLoggedIn()">
+				  <a class="tablinks" [routerLink]="['/roomReservations']">Room reservations</a>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
 
-<div class="tab">
- 
- <div *ngIf="!isLoggedIn()" >
-    <a class="tablinks" [routerLink]="['/login']">Login</a>
-  
-    <a class="tablinks" [routerLink]="['/register']">Register</a>
- </div>
-  <div *ngIf="isLoggedIn()">
-      <a class="tablinks" [routerLink]="['/logout']">Logout</a>
-  </div>
-   <div *ngIf="isLoggedIn() && isAdmin()">
-      <a class="tablinks" [routerLink]="['/region']">Region</a>
-  </div>
-  <div *ngIf="isLoggedIn() && isAdmin()">
-      <a class="tablinks" [routerLink]="['/country']">Country</a>
-  </div>
-  <div *ngIf="isLoggedIn() && isAdmin()">
-      <a class="tablinks" [routerLink]="['/place']">Place</a>
-  </div>
-  <div *ngIf="isLoggedIn()">
-      <a class="tablinks" [routerLink]="['/accommodation']">Accommodation</a>
-  </div>
-  <div *ngIf="isLoggedIn() && isAdmin()">
-      <a class="tablinks" [routerLink]="['/accommodationType']">Accommodation type</a>
-  </div>
-   <div *ngIf="isLoggedIn()">
-      <a class="tablinks" [routerLink]="['/room']">Room</a>
-  </div>
-   <div *ngIf="isLoggedIn()">
-      <a class="tablinks" [routerLink]="['/comment']">Comment</a>
-  </div>
-   
-   <div *ngIf="isLoggedIn()">
-      <a class="tablinks" [routerLink]="['/roomReservations']">Room reservations</a>
-  </div>
-  
-</div>
-
-
+<div style="">
+    
 <router-outlet></router-outlet>
+</div>
