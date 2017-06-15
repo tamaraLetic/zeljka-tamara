@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../accommodation/accommodation.model';
+import { Room } from '../room/room.model';
 import { AccommodationType } from '../accommodation-type/accommodation-type.model';
 import { Router, ActivatedRoute } from "@angular/router";
 import {AccommodationService} from '../accommodation-list/accommodation-list.service';
@@ -17,6 +18,7 @@ export class ShowAccommodatonComponent implements OnInit {
   acc: Accommodation;
   id: number = -1;
   accType : AccommodationType;
+  rooms: Room [];
 
   constructor(private accService: AccommodationService, private accTypeService: AccommodationTypeListService, private router: Router, private activatedRoute: ActivatedRoute) { 
 
@@ -29,6 +31,8 @@ export class ShowAccommodatonComponent implements OnInit {
     this.accService.getById(this.id).subscribe(res => 
     {
       this.acc = res[0];
+      this.rooms = res[0].Rooms;
+      console.log(this.rooms);
     });
   }
 

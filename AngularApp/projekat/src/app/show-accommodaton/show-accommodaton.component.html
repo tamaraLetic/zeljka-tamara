@@ -59,6 +59,16 @@
         <hr class="featurette-divider">
 
 
+        <h2 class="text-muted">Reserve your room!</h2>
+        <div class="row" *ngFor="let x of rooms">
+            <div class="col-md-5">
+                <h3>{{x.RoomNumber}}</h3>
+                <p>{{x.Description}}</p>
+                <a class="btn btn-primary" href="#">Book Now! <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+
         <!-- Footer -->
         <footer>
             <div class="row">
