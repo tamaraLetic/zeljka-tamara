@@ -70,6 +70,16 @@ body {
   cursor: pointer;
   font-family: 'Open Sans Condensed', sans-serif;
 }
+.login-form input[type="reset"] {
+  height: 2em;
+  width: 20%;
+  background: #A0FF77;
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  cursor: pointer;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
 .login-form a {
   color: #cdcdcd;
   cursor: pointer;

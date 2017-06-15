@@ -1,38 +1,26 @@
 
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Accommodation input form
 </h1>
+</div>
+<div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
-    <div> 
-      <label for="Name">Name:</label><br>
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name">
-    </div>
-  <br>
-  <div>
-      <label for="desc">Description:</label><br> 
-      <input type="text" id="desc" name="desc" value="" [(ngModel)]="Description">
-  </div>
-  <br>
-  <div>
-      <label for="address">Address:</label><br> 
-      <input type="text" id="address" name="address" value="" [(ngModel)]="Address">
-  </div>
-  <br>
-  <div>
-      <label for="lat">Latitude:</label><br> 
-      <input type="text" id="lat" name="desc" lat="" [(ngModel)]="Latitude">
-  </div>
-  <br>
-  <div>
-      <label for="long">Longitude:</label><br> 
-      <input type="text" id="long" name="long" value="" [(ngModel)]="Longitude">
-  </div>
-  <br>
-  <div>
-      <label for="image">Image:</label><br> 
-      <input  type="file" name="ImageURL" id="ImageURL" (change)="onChange($event)"/>
-  </div>
-  <br>
+    
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
+   <br /><br />
+      <input type="text" id="desc" name="desc" value="" [(ngModel)]="Description" placeholder="Description">
+   <br /><br />
+      <input type="text" id="address" name="address" value="" [(ngModel)]="Address" placeholder="Address">
+  <br /><br />
+      <input type="text" id="lat" name="desc" lat="" [(ngModel)]="Latitude" placeholder="Latitude">
+   <br /><br />
+ 
+      <input type="text" id="long" name="long" value="" [(ngModel)]="Longitude" placeholder="Longitude">
+  <br /><br />
+      <input  type="file" name="ImageURL" id="ImageURL" (change)="onChange($event)" placeholder="Image"/>
+  <br /><br />
   <div>
       <label for="places">Place:</label><br>
        <select [(ngModel)]="SelectedPlace" name="SelectedPlace">
@@ -54,26 +42,22 @@
    
   <br><br>
   <div>
-      <input type="submit" value="Submit">    
-      <input type="reset" value="Clear form" />
+      <input type="submit" value="Submit" title="login">
+       
+      <input type="reset" value="Clear" title="login">
   </div>
 </form> 
-
-<div>
-  <ul>
-    <li *ngFor="let c of accommodations" >
+</div>
+  
+</div>
+<br><br>
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of accommodations" class="list-group-item">
       <accommodation [accommodation]="c"></accommodation>     
       <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
       <button *ngIf="hasRight(c.AppUserId)" (click)="delete(c.Id)">delete</button>
-      <div style="width:50%; margin: 0 auto">
-        <agm-map [latitude]="c.Latitude" [longitude]="c.Longitude" [zoom]="18">
-            <agm-marker [latitude]="c.Latitude" [longitude]="c.Longitude" [title]="c.Name">
-           </agm-marker>
-        </agm-map>
-      </div>
-      <div>
-          <img  src="http://localhost:54042/{{c.ImageURL}}" style="width:304px;height:228px;">
-      </div>
+     
     </li>
   </ul>
 </div>

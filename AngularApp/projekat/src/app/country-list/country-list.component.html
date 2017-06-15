@@ -1,16 +1,20 @@
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Country input form
 </h1>
+</div>
+<div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div> 
       <label for="Name">Name:</label><br>
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name">
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
     </div>
  
   <br>
   <div>
       <label for="Code">Code:</label><br> 
-      <input type="text" id="Code" name="Code" value="" [(ngModel)]="Code">
+      <input type="text" id="Code" name="Code" value="" [(ngModel)]="Code" placeholder="Code">
   </div>
    
   <br><br>
@@ -18,20 +22,19 @@
       <input type="submit" value="Submit">
   </div>
 </form> 
-<br>
-<h2>
-  List of countries
-</h2>
-<div >
-    <table class="table table-striped table-condensed">
-      <tbody>
-            <tr *ngFor="let c of countries"><country [country]="c"></country>
-            <td><button *ngIf="hasRight()" [routerLink]= "['/editCountry/', c.Id]">edit</button></td>
-            <td><button *ngIf="hasRight()" (click)="deleteCountry(c.Id)">delete</button></td>
-            </tr>
-        </tbody>
-    </table>
 </div>
+  
+</div>
+<br><br>
 
-{{Name}}
-{{Code}}
+
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of countries" class="list-group-item">
+      <country [country]="c"></country>
+      <!--<button (click)="hasRight(c.Id)">right</button>-->
+      <button *ngIf="hasRight()" [routerLink]= "['/editCountry/', c.Id]">edit</button>
+       <button *ngIf="hasRight()" (click)="deleteCountry(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>
