@@ -59,22 +59,26 @@
   </div>
 </form> 
 
+<h3>
+    Accommodations:
+</h3>
 <div>
   <ul>
     <li *ngFor="let c of accommodations" >
-      <accommodation [accommodation]="c"></accommodation>     
-      <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
-      <button *ngIf="hasRight(c.AppUserId)" (click)="delete(c.Id)">delete</button>
-      <div style="width:50%; margin: 0 auto">
-        <agm-map [latitude]="c.Latitude" [longitude]="c.Longitude" [zoom]="18">
-            <agm-marker [latitude]="c.Latitude" [longitude]="c.Longitude" [title]="c.Name">
-           </agm-marker>
-        </agm-map>
-      </div>
-      <div>
-          <img  src="http://localhost:54042/{{c.ImageURL}}" style="width:304px;height:228px;">
-      </div>
+        <span>
+            <accommodation [accommodation]="c"></accommodation>     
+            <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
+            <button *ngIf="hasRight(c.AppUserId)" (click)="delete(c.Id)">delete</button>
+        </span>
+        <span style="width:50%; margin: 0 auto">
+            <agm-map [latitude]="c.Latitude" [longitude]="c.Longitude" [zoom]="15">
+                <agm-marker [latitude]="c.Latitude" [longitude]="c.Longitude" [title]="c.Name">
+            </agm-marker>
+            </agm-map>
+        </span>
+      <span>
+          <img style="position: absolute; right: 16px;"  src="http://localhost:54042/{{c.ImageURL}}" style="width:304px;height:228px;">
+      </span>
     </li>
   </ul>
 </div>
-

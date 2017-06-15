@@ -23,6 +23,7 @@ namespace BookingApp.Controllers
             return db.AccommodationTypes;
         }
 
+        [EnableQuery]
         [HttpGet]
         [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(AccommodationType))]

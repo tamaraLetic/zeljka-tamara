@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>One Page Wonder - Start Bootstrap Template</title>
+
+</head>
+
+<body>
+
+    <div style="text-align: center">
+        <h1 style="font-weight: bold ">
+            {{acc.Name}} : {{acc.AccommodationType.Name}}
+        </h1>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr class="featurette-divider">
+
+        <!-- First Featurette -->
+        <div class="featurette" id="about">
+            <img class="featurette-image img-circle img-responsive pull-right" src="http://localhost:54042/{{acc.ImageURL}}">
+
+            <h2 class="featurette-heading">Our facility
+                <span class="text-muted">Will Catch Your Eye</span>
+            </h2>
+            <p class="lead">{{acc.Description}}</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="featurette" id="services">
+            <br>
+            <h2 class="featurette-heading">We have great grades!
+                <span class="text-muted">{{acc.AvargeGrade}}</span>
+            </h2>
+        </div>
+
+        <!-- Second Featurette -->
+        <div class="featurette" id="services">
+            <br>
+            <h2 class="featurette-heading">Find us here
+            </h2>
+            <br>
+            <agm-map [latitude]="acc.Latitude" [longitude]="acc.Longitude" [zoom]="15">
+                <agm-marker [latitude]="acc.Latitude" [longitude]="acc.Longitude" [title]="ame"> 
+            </agm-marker>
+            </agm-map>
+        </div>
+
+        <hr class="featurette-divider">
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Tasa&Zeks Travel 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+
+</body>
+
+</html>

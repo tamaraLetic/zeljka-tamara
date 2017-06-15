@@ -40,7 +40,9 @@ import { EditCountryComponent } from './edit-country/edit-country.component';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
 import { EditAccommodationComponent } from './edit-accommodation/edit-accommodation.component'
 import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-accommodation-type.component';
-import { EditRoomComponent } from './edit-room/edit-room.component'
+import { EditRoomComponent } from './edit-room/edit-room.component';
+import { FilterComponent } from './filter/filter.component';
+import { ShowAccommodatonComponent } from './show-accommodaton/show-accommodaton.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -49,7 +51,7 @@ const Routes = [
   {path: "register", component: RegisterAppuserComponent},
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent, AdminGuard},
-  {path: "room", component: RoomListComponent},
+  {path: "room", component: RoomListComponent, ManagerGuard},
   {path: "roomReservations", component: RoomReservationsListComponent},
   {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
@@ -57,12 +59,13 @@ const Routes = [
   {path: "editCountry/:Id", component: EditCountryComponent, AdminGuard},
   {path: "place", component: PlaceListComponent, AdminGuard},
   {path: "editPlace/:Id", component: EditPlaceComponent, AdminGuard},
-  {path: "accommodation", component: AccommodationListComponent},
+  {path: "accommodation", component: AccommodationListComponent, ManagerGuard},
   {path: "editAccommodation/:Id", component: EditAccommodationComponent, ManagerGuard},
   {path: "editAccommodationType/:Id", component: EditAccommodationTypeComponent, AdminGuard},
-  {path: "editRoom/:Id", component: EditRoomComponent},
+  {path: "editRoom/:Id", component: EditRoomComponent, ManagerGuard},
   {path: "accommodationType", component: AccommodationTypeListComponent, AdminGuard},
-  {path: "register-manager", component: RegisterManagerComponent, ManagerGuard}
+  {path: "register-manager", component: RegisterManagerComponent, ManagerGuard},
+  {path: "showAccommodation/:Id", component: ShowAccommodatonComponent}
 ]
 
 @NgModule({
@@ -95,7 +98,9 @@ const Routes = [
     EditPlaceComponent,
     EditAccommodationComponent,
     EditAccommodationTypeComponent,
-    EditRoomComponent
+    EditRoomComponent,
+    FilterComponent,
+    ShowAccommodatonComponent
 
   ],
   imports: [
