@@ -1,25 +1,27 @@
-
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Room input form
 </h1>
+ </div>
+ <div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="roomNum">Room number:</label><br>
-      <input type="text" id="roomNum" name="roomNum" value="" [(ngModel)]="roomNum">
-    </div>
-      <div> 
-      <label for="bedCount">Bed count:</label><br>
-      <input type="text" id="bedCount" name="bedCount" value="" [(ngModel)]="bedCount">
-    </div>
-    <div> 
-      <label for="description">Description:</label><br>
-      <input type="text" id="description" name="description" value="" [(ngModel)]="description">
-    </div>
-    <div> 
-      <label for="pricePerNight">Price per night:</label><br>
-      <input type="text" id="pricePerNight" name="pricePerNight" value="" [(ngModel)]="pricePerNight">
-    </div>
-    <br>
+ 
+      <input type="text" id="roomNum" name="roomNum" value="" [(ngModel)]="roomNum" placeholder="Room number" >
+ 
+      <br /><br />
+      
+      <input type="text" id="bedCount" name="bedCount" value="" [(ngModel)]="bedCount" placeholder="Bed count">
+    
+    <br /><br />
+   
+      <input type="text" id="description" name="description" value="" [(ngModel)]="description" placeholder="Description">
+   
+   <br /><br />
+ 
+      <input type="text" id="pricePerNight" name="pricePerNight" value="" [(ngModel)]="pricePerNight" placeholder="Price per night">
+  
+    <br><br /><br />
     <div>
       <label for="Accommodation">Accommodation:</label><br>
        <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
@@ -29,14 +31,16 @@
     </div>
   <br><br>
   <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" title="login">
   </div>
 </form> 
-
+  </div>
+  
+</div>
 <br><br>
-<div >
-  <ul>
-    <li *ngFor="let c of rooms" >
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of rooms" class="list-group-item">
       <room [room]="c"></room>
       <button *ngIf="hasRight()" [routerLink]= "['/editRoom/', c.Id]">edit</button>
       <button *ngIf="hasRight()" (click)="deleteRoom(c.Id)">delete</button>

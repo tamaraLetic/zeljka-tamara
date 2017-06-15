@@ -1,5 +1,5 @@
 
-<h1>
+<!--<h1>
   Place input form
 </h1>
   <form #f="ngForm" (ngSubmit)="onSubmit()">
@@ -30,4 +30,36 @@
       <button *ngIf="hasRight()" (click)="deletePlace(c.Id)">delete</button>
     </li>
   </ul>
+</div>-->
+
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+    <h1 title="login">Place input form</h1>
+  </div>
+  <div class="login-form">
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name" />
+      <br /><br />
+      <label for="Region">Region:</label><br>
+       <select [(ngModel)]="selectedRegion" name="selectedRegion">
+                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
+            </select>
+      <br /><br />
+      <input title="login" type="submit" value="Add" />
+      <br /><br />
+    </form>
+  </div>
+  
 </div>
+<br>
+
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of places" class="list-group-item">
+      <place [place]="c"></place>
+      <button *ngIf="hasRight()" [routerLink]= "['/editPlace/', c.Id]">edit</button>
+      <button *ngIf="hasRight()" (click)="deletePlace(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>
+

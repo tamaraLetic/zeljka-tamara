@@ -1,18 +1,18 @@
-
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Comment input form
 </h1>
+  </div>
+  <div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="text">Text:</label><br>
-      <input type="text" id="text" name="text" value="" [(ngModel)]="text">
-    </div>
-    <br>
-    <div> 
-      <label for="grade">Grade:</label><br>
-      <input type="grade" id="grade" name="grade" value="" [(ngModel)]="grade">
-    </div>
-    <br>
+  
+     
+      <input type="text" id="text" name="text" value="" [(ngModel)]="text" placeholder="Tekst">
+<br /><br />
+   
+      <input type="text" id="grade" name="grade" value="" [(ngModel)]="grade" placeholder="Grade">
+   <br /><br />
     <div>
      <label for="Accommodation">Accommodation:</label><br>
        <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
@@ -22,14 +22,16 @@
     </div>
   <br><br>
   <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" title="login">
   </div>
 </form> 
-
+</div>
+  
+</div>
 <br><br>
-<div >
-  <ul>
-    <li *ngFor="let c of comments" >
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of comments" class="list-group-item">
       <comment [comment]="c"></comment>
       <!--<button *ngIf="hasRight()" [routerLink]= "['/editComment/', c.Id]">edit</button>-->
       <button *ngIf="hasRight()" (click)="deleteComment(c.Id)">delete</button>

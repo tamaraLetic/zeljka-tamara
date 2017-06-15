@@ -1,17 +1,16 @@
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Room Reservations input form
 </h1>
+</div>
+<div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="startDate">Start date:</label><br>
-      <input type="date" id="startDate" name="startDate" value="" [(ngModel)]="startDate">
-    </div>
-    <br>
-    <div> 
-      <label for="endDate">End date:</label><br>
-      <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate">
-    </div>
-    <br>
+   
+      <input type="date" id="startDate" name="startDate" value="" [(ngModel)]="startDate" placeholder="Start date">
+     <br /><br />
+      <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate" placeholder="End date">
+     <br /><br />
     <div>
      <label for="Rooms">Room:</label><br>
        <select [(ngModel)]="selectedRooom" name="selectedRooom">
@@ -21,14 +20,16 @@
     </div>
   <br><br>
   <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" title="login">
   </div>
 </form> 
-
+</div>
+  
+</div>
 <br><br>
-<div >
-  <ul>
-    <li *ngFor="let c of roomReservationss" >
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of roomReservationss" class="list-group-item">
       <room-reservations [roomReservations]="c"></room-reservations>
       <!--<button (click)="hasRight(c.Id)">right</button>-->
       <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="cancelRoomReservations(c)">cancel</button>
