@@ -1,10 +1,13 @@
 import { Filter } from "./filter.model";
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {PortService} from '../port.service';
+import {Http, Response, Headers, RequestOptions,Request } from '@angular/http';
 
 @Injectable()
 export class FilterService {
 
-    constructor() {}
+    constructor(private http: Http) {}
 
     generateQuery(filterParams: Filter):string 
     {
@@ -67,7 +70,7 @@ export class FilterService {
           filter += `AccommodationType/Name eq '${filterParams.AccType}'`;
         }
 
-        if (filterParams.BedCount)
+        if (filterParams.BedCount != 0)
         {
           if (filter !="")
           {
@@ -80,7 +83,7 @@ export class FilterService {
           filter += `Rooms/any(r: r/BedCount ge ${filterParams.BedCount})`;
         }
 
-        if (filterParams.Grade)
+        if (filterParams.Grade != 0)
         {
           if (filter !="")
           {
@@ -93,7 +96,7 @@ export class FilterService {
           filter += `AverageGrade ge ${filterParams.Grade}`;
         }
 
-        if (filterParams.PriceMin || filterParams.PriceMax)
+        if (filterParams.PriceMin != 0 || filterParams.PriceMax != 0)
         {
           let min = Number.MIN_VALUE;
           let max = Number.MAX_VALUE;
@@ -120,7 +123,8 @@ export class FilterService {
 
         if(filter != "")
         {
-          filter = '?$inlinecount=allpages' + filter; 
+          // filter = '?$inlinecount=allpages' + filter; 
+           filter =  filter; 
         }
         else
         {
@@ -128,9 +132,14 @@ export class FilterService {
         }
 
         filter += `&$top=${filterParams.PageNum}`;
-        filter += `&$skip=${filterParams.PageNum}`;
+       // filter += `&$skip=${filterParams.PageNum}`;
 
         return filter;
+    }
+
+    getAll(filter: string): Observable<any>{
+
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations/${filter}`);              
     }
 
 }
