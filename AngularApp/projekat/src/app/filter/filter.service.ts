@@ -98,8 +98,8 @@ export class FilterService {
 
         if (filterParams.PriceMin != 0 || filterParams.PriceMax != 0)
         {
-          let min = Number.MIN_VALUE;
-          let max = Number.MAX_VALUE;
+          let min = 0;
+          let max = 1000000;
           if(filterParams.PriceMin)
           {
             min = filterParams.PriceMin;
@@ -123,8 +123,7 @@ export class FilterService {
 
         if(filter != "")
         {
-          // filter = '?$inlinecount=allpages' + filter; 
-           filter =  filter; 
+           filter = '?$inlinecount=allpages&$' + filter; 
         }
         else
         {
@@ -132,14 +131,14 @@ export class FilterService {
         }
 
         filter += `&$top=${filterParams.PageNum}`;
-       // filter += `&$skip=${filterParams.PageNum}`;
+        //filter += `&$skip=${filterParams.PageNum}`;
 
         return filter;
     }
 
     getAll(filter: string): Observable<any>{
 
-        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations/${filter}`);              
+        return this.http.get(`http://localhost:${PortService.portNumber}/odata/Search${filter}`);              
     }
 
 }

@@ -16,7 +16,6 @@ namespace BookingApp.Controllers
 
         [EnableQuery]
         [HttpGet]
-        [Route("FilterAccommodations")]
         public IQueryable<Accommodation> m1()
         {
             return db.Accommodations;

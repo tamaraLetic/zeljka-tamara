@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import {Filter} from './filter/filter.model'
+import {Accommodation} from './accommodation/accommodation.model'
 import {FilterService} from './filter/filter.service'
 
 @Component({
@@ -14,6 +15,7 @@ export class AppComponent {
   title = 'app';
   user =this.isLoggedIn();
   filterParams: Filter;
+  acc : Accommodation [];
 
 
 constructor(private authService: AuthService, private filter: FilterService){
@@ -29,6 +31,7 @@ constructor(private authService: AuthService, private filter: FilterService){
     this.filterParams.PriceMax = 0;
     this.filterParams.PriceMin = 0;
     this.filterParams.Region = "";
+    this.acc= [];
   }
 
   logIn(){
@@ -56,10 +59,15 @@ constructor(private authService: AuthService, private filter: FilterService){
 
   onSubmit(filter: Filter, form: any){
 
+    this.filterParams = filter as Filter;
     this.filterParams.PageNum = 10;
-   
-    let filterEl = this.filter.generateQuery(this.filterParams);
-    console.log(filter);
-    this.filter.getAll(filterEl).subscribe();
+    let filterEl = this.filter.generateQuery(filter);
+    console.log(filterEl);
+    this.filter.getAll(filterEl).subscribe(x => 
+    {
+      this.acc=x.json();
+      console.log(this.acc);
+    });
+    console.log(this.acc);
   }
 }
