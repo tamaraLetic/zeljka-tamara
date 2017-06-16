@@ -14,6 +14,7 @@ import { RegisterAppuserComponent } from './register-appuser/register-appuser.co
 import { RegisterManagerComponent } from './register-manager/register-manager.component';
 
 import { AuthService } from './auth.service';
+import { FilterParamsService } from './filter-params.service';
 
 import { LoggedInGuard } from './logged-in.guard';
 import { AdminGuard } from './admin.guard';
@@ -113,7 +114,7 @@ const Routes = [
     RouterModule.forRoot(Routes),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [AuthService, LoggedInGuard],
+  providers: [AuthService, LoggedInGuard, FilterParamsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
