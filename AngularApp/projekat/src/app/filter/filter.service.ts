@@ -9,7 +9,7 @@ export class FilterService {
 
     constructor(private http: Http) {}
 
-    generateQuery(filterParams: Filter):string 
+    generateQuery(filterParams: Filter, pageNum?: number):string  //pageNum ==> number of current page
     {
         let filter= "";
 
@@ -131,7 +131,11 @@ export class FilterService {
         }
 
         filter += `&$top=${filterParams.PageNum}`;
-        //filter += `&$skip=${filterParams.PageNum}`;
+
+        if ((filterParams.PageNum*pageNum-filterParams.PageNum) != 0)//first page
+        {
+          filter += `&$skip=${filterParams.PageNum*pageNum-filterParams.PageNum}`;
+        }
 
         return filter;
     }

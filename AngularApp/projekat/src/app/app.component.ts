@@ -52,7 +52,12 @@ constructor(private authService: AuthService,private router: Router, private act
   onSubmit(filter: Filter, form: any){
 
     FilterParamsService.filterParams = filter;
-    FilterParamsService.filterParams.PageNum = 10; 
+
+    if (FilterParamsService.filterParams.PageNum.toString() == "")
+    {
+      FilterParamsService.filterParams.PageNum = 10; 
+    }
+ 
     this.router.navigate(['/showAccommodations']);
   }
 }

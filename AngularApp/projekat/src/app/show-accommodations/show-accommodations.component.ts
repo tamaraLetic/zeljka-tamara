@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../accommodation/accommodation.model';
 import { Place } from '../place/place.model';
+import { Filter } from '../filter/filter.model';
 import { AccommodationType } from '../accommodation-type/accommodation-type.model';
 import { AccommodationTypeListService } from '../accommodation-type-list/accommodation-type-list.service';
 import { PlaceListService } from '../place-list/place-list.service';
@@ -18,23 +19,146 @@ import {AccommodationService} from '../accommodation-list/accommodation-list.ser
 })
 export class ShowAccommodationsComponent implements OnInit {
   accommodations : Accommodation [];
+  accLenght: number = 0;
+  numOfPages : number = 0;
+  pageNumbers: number[];
 
   constructor(private accService: AccommodationService, private filterService: FilterService) { 
     this.accommodations = [];
+    this.pageNumbers = [];
   }
 
   ngOnInit() {
 
-    if (!FilterParamsService.filterParams)
+    if (!FilterParamsService.filterParams.PageNum)
     {
-
-       this.accService.getAll().subscribe(res => {this.accommodations = res.json(); });
+       FilterParamsService.filterParams.AccName = "";
+       FilterParamsService.filterParams.AccType = "";
+       FilterParamsService.filterParams.BedCount = 0;
+       FilterParamsService.filterParams.Country = "";
+       FilterParamsService.filterParams.Place = "";
+       FilterParamsService.filterParams.Grade = 0;
+       FilterParamsService.filterParams.PageNum = 10;
+       FilterParamsService.filterParams.Region = "";
+       FilterParamsService.filterParams.PriceMax = 0;
+       FilterParamsService.filterParams.PriceMin = 0;
     }
-    else
+        
+    let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams,1);
+    this.filterService.getAll(filterEl).subscribe(x => 
     {
+      this.accLenght = x.json()["odata.count"];
+      this.accommodations = x.json().value;   
+      this.numOfPages = Math.ceil(this.accLenght/FilterParamsService.filterParams.PageNum);
 
-        let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams);
-        this.filterService.getAll(filterEl).subscribe(x => {this.accommodations = x.json().value; });
+      if (this.numOfPages <= 5)
+      {
+        for (let i = 1; i <= this.numOfPages; i++)
+        {
+          this.pageNumbers.push(i);
+        }
+      }
+      else
+      {
+        for (let i = 1; i <= 5; i++)
+        {
+          this.pageNumbers.push(i);
+        }
+      }
+    });
+    
+  }
+
+  getNextPage(currentPageNum: number){
+
+    let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams, currentPageNum);//1 = koji je trenutno broj stranice
+        this.filterService.getAll(filterEl).subscribe(x => 
+        {
+          this.accommodations = x.json().value;  
+          this.setActive(currentPageNum);                
+        });
+
+  }
+
+  getNextRange(){
+
+    let pageNumbersLenght = this.pageNumbers.length;
+    let lastValue = this.pageNumbers[pageNumbersLenght-1];
+    let restNumPages = 0
+
+    if (this.numOfPages > lastValue)
+    {
+      restNumPages = this.numOfPages - lastValue;
+    }
+
+    if (restNumPages > 0)
+    {
+        this.pageNumbers.splice(0,pageNumbersLenght);
+
+        if (restNumPages <= 5)
+        {
+          for (let i = lastValue + 1; i <= lastValue + restNumPages; i++)
+          {
+            this.pageNumbers.push(i);
+          }
+        }
+        else
+        {
+          for (let i = lastValue + 1; i <= 5; i++)
+          {
+            this.pageNumbers.push(i);
+          }
+        }
+
+        let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams, lastValue + 1);
+            this.filterService.getAll(filterEl).subscribe(x => 
+            {
+              this.accommodations = x.json().value; 
+              this.setActive(this.pageNumbers[0]); 
+            });
     }
   }
+
+  getPreviousRange(){
+
+    let pageNumbersLenght = this.pageNumbers.length;
+    let lastValue = this.pageNumbers[pageNumbersLenght-1];
+    let firstValue = this.pageNumbers[0];
+
+    if (lastValue > 5)
+    {
+        this.pageNumbers.splice(0,pageNumbersLenght);
+
+        for (let i = firstValue - 5; i <= 5; i++)
+        {
+          this.pageNumbers.push(i);
+        }
+
+        let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams, firstValue - 1);
+            this.filterService.getAll(filterEl).subscribe(x => 
+            {
+              this.accommodations = x.json().value; 
+              this.setActive(this.pageNumbers[4]);
+            });
+    }
+  }
+
+  setActive(currentPageNum){
+
+    var element = document.getElementById(currentPageNum.toString());
+    var elements = document.getElementsByName("liStyle");
+
+    for (let i = 0; i < this.pageNumbers.length; i++)
+    {
+      if (elements[i].id == currentPageNum.toString())
+      {
+        element.setAttribute("class","active");
+      }
+      else
+      {
+        elements[i].setAttribute("class","");
+      }
+    }
+  }
+
 }
