@@ -22,7 +22,7 @@ export class AccommodationService{
 
     create(acc: Accommodation, file: File): Observable<Response>
     {
-        let formData:FormData = new FormData();
+        let formData:FormData = new FormData();        
         formData.append('accommodation', JSON.stringify(acc));
         formData.append('uploadFile', file, file.name);
         console.log(formData);
