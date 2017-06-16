@@ -90,7 +90,6 @@ export class AccommodationListComponent implements OnInit {
         let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
         let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
         let files: FileList = target.files;
-        this.file = files[0];
         console.log(this.file);
     }
 

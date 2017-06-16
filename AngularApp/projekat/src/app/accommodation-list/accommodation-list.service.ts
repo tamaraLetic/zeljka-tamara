@@ -23,13 +23,14 @@ export class AccommodationService{
     create(acc: Accommodation, file: File): Observable<Response>
     {
         let formData:FormData = new FormData();
+        let token = localStorage.getItem("token");
         formData.append('accommodation', JSON.stringify(acc));
         formData.append('uploadFile', file, file.name);
-        console.log(formData);
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         
         headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + JSON.parse(token).token);
         let options = new RequestOptions({ headers: headers });
         
         return this.http.post(`http://localhost:${PortService.portNumber}/api/accommodations`, formData, options);

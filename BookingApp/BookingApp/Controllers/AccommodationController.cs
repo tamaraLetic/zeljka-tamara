@@ -78,7 +78,7 @@ namespace BookingApp.Controllers
             var userRole = baUser.Roles.FirstOrDefault().RoleId;
             var roleName = db.Roles.FirstOrDefault(a => a.Id == userRole);
 
-            if (!roleName.Equals("Manager"))
+            if (!roleName.Name.Equals("Manager"))
             {
                 return Unauthorized();
             }
@@ -189,7 +189,7 @@ namespace BookingApp.Controllers
             var userRole = baUser.Roles.FirstOrDefault().RoleId;
             var roleName = db.Roles.FirstOrDefault(a => a.Id == userRole);
 
-            if (!roleName.Equals("Manager"))
+            if (!roleName.Name.Equals("Manager"))
             {
                 return Unauthorized();
             }
