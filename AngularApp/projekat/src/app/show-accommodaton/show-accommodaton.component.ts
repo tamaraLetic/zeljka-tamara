@@ -23,6 +23,7 @@ export class ShowAccommodatonComponent implements OnInit {
   constructor(private accService: AccommodationService, private accTypeService: AccommodationTypeListService, private router: Router, private activatedRoute: ActivatedRoute) { 
 
     this.acc = new Accommodation();
+    this.acc.AccommodationType = {} as AccommodationType;
   }
 
   ngOnInit() {

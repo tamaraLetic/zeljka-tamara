@@ -1,32 +1,29 @@
 
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Accommodation edit
   </h1>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="acc.Name">Name:</label><br>
+  </div>
+<div class="login-form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+    
       <input type="text" id="acc.Name" name="acc.Name" [(ngModel)]="acc.Name">
-    </div>
-  <br>
-  <div>
-      <label for="desc">Description:</label><br> 
+      <br /><br />
       <input type="text" id="acc.Description" name="acc.Description" [(ngModel)]="acc.Description">
-  </div>
-  <br>
-  <div>
-      <label for="address">Address:</label><br> 
+   <br /><br />
       <input type="text" id="acc.Address" name="acc.Address"[(ngModel)]="acc.Address">
-  </div>
-  <br>
-  <div>
-      <label for="image">Image:</label><br> 
+  <br /><br />
       <input type="text" id="acc.ImageURL" name="acc.ImageURL" [(ngModel)]="acc.ImageURL">
-  </div>
+ 
 
    
   <br><br>
   <div>
-      <input type="submit" value="Submit">
-      <input type="reset" value="Clear form" />
+      <input type="submit" value="Submit" title="login">
+      <input type="reset" value="Clear form" title="login"/>
   </div>
 </form>
+</div>
+  
+</div>

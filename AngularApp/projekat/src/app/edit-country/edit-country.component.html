@@ -1,21 +1,22 @@
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Country edit
 </h1>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      
-      <label for="country.Name">Name:</label><br>
+</div>
+<div class="login-form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+  
       <input type="text" id="country.Name" name="country.Name" [(ngModel)] ="country.Name">
-    </div>
- 
-  <br>
-  <div>
-      <label for="country.Code">Code:</label><br> 
+     <br /><br />
       <input type="text" id="country.Code" name="country.Code" [(ngModel)] ="country.Code">
-  </div>
+ 
    
   <br><br>
   <div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" title="login">
   </div>
 </form> 
+</div>
+  
+</div>
