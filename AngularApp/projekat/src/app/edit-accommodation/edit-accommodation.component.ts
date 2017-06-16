@@ -30,7 +30,10 @@ export class EditAccommodationComponent implements OnInit {
     
     this.accTypeService.getAll().subscribe(x => this.accTypes = x.json());
     this.activatedRoute.params.subscribe(params => {this.id = parseInt(params["Id"])});
-    this.accService.getById(this.id).subscribe(res => this.acc = res);
+    this.accService.getById(this.id).subscribe(res => 
+    {
+      this.acc = res[0];
+    });
   }
   
   onSubmit(){
