@@ -44,6 +44,10 @@ constructor(private authService: AuthService,private router: Router, private act
 
     return this.authService.isManager();
   }
+    isUser():boolean{
+
+    return this.authService.isUser();
+  }
 
   onSubmit(filter: Filter, form: any){
 

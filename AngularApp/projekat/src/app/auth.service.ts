@@ -68,5 +68,17 @@ export class AuthService{
 
         return auth;
     }
-    
+    isUser(): boolean{
+
+        let token = localStorage.getItem("token");
+        let role = JSON.parse(token).role;
+        let auth = false;
+
+        if (role=="AppUser")
+        {
+            auth = true;
+        }
+
+        return auth;
+    }
 }

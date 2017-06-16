@@ -8,6 +8,7 @@ import { FilterParamsService } from '../filter-params.service';
 import { FilterService } from '../filter/filter.service';
 import {AccommodationService} from '../accommodation-list/accommodation-list.service';
 
+
 @Component({
   selector: 'app-show-accommodations',
   templateUrl: './show-accommodations.component.html',
