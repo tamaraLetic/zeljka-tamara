@@ -56,6 +56,10 @@ constructor(private authService: AuthService, private filter: FilterService){
 
     return this.authService.isManager();
   }
+    isUser():boolean{
+
+    return this.authService.isUser();
+  }
 
   onSubmit(filter: Filter, form: any){
 

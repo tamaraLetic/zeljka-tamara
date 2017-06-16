@@ -5,13 +5,14 @@ import { AccommodationType } from '../accommodation-type/accommodation-type.mode
 import { Router, ActivatedRoute } from "@angular/router";
 import {AccommodationService} from '../accommodation-list/accommodation-list.service';
 import {AccommodationTypeListService} from '../accommodation-type-list/accommodation-type-list.service';
+import {AuthService}from '../auth.service';
 
 @Component({
   selector: 'app-show-accommodaton',
   templateUrl: './show-accommodaton.component.html',
   styleUrls: ['./show-accommodaton.component.css'],
   styles: ['agm-map {height: 500px; width: 700px;}'], //postavljamo sirinu i visinu mape
-  providers:[AccommodationService,AccommodationTypeListService] //dodali servis
+  providers:[AccommodationService,AccommodationTypeListService,AuthService ] //dodali servis
 })
 export class ShowAccommodatonComponent implements OnInit {
 
@@ -20,7 +21,7 @@ export class ShowAccommodatonComponent implements OnInit {
   accType : AccommodationType;
   rooms: Room [];
 
-  constructor(private accService: AccommodationService, private accTypeService: AccommodationTypeListService, private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private authService: AuthService,private accService: AccommodationService, private accTypeService: AccommodationTypeListService, private router: Router, private activatedRoute: ActivatedRoute) { 
 
     this.acc = new Accommodation();
     this.acc.AccommodationType = {} as AccommodationType;
@@ -36,5 +37,12 @@ export class ShowAccommodatonComponent implements OnInit {
       console.log(this.rooms);
     });
   }
+ isUser():boolean{
 
+    return this.authService.isUser();
+  }
+    isLoggedIn() : boolean{
+
+    return this.authService.isLoggedIn();
+  }
 }

@@ -6,6 +6,7 @@ import { AccommodationTypeListService } from '../accommodation-type-list/accommo
 import { PlaceListService } from '../place-list/place-list.service';
 import {AccommodationService} from '../accommodation-list/accommodation-list.service';
 
+
 @Component({
   selector: 'app-show-accommodations',
   templateUrl: './show-accommodations.component.html',
