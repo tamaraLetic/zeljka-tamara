@@ -71,7 +71,7 @@ const Routes = [
   {path: "register-manager", component: RegisterManagerComponent},
   {path: "showAccommodation/:Id", component: ShowAccommodatonComponent},
   {path: "showAccommodations", component: ShowAccommodationsComponent},
-  {path: "approveAccommodations", component: ApproveAccommodationComponent}
+  {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard}
 ]
 
 @NgModule({

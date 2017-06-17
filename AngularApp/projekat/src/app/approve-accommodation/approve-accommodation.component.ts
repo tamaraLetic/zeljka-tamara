@@ -43,17 +43,20 @@ export class ApproveAccommodationComponent implements OnInit {
   approve(acc: Accommodation){
 
     acc.Approved = true;
-    this.accService.approve(acc).subscribe(x => acc = x);
+    this.accService.approve(acc).subscribe();
   }
 
   ifApproved(approved: boolean){
 
     if (approved)
     {
+      console.log(approved);
       return true;
+
     }
     else
     {
+      console.log(approved);
       return false;
     }
   }
