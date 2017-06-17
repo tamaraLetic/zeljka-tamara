@@ -60,7 +60,7 @@ constructor(private authService: AuthService,private router: Router, private act
       FilterParamsService.filterParams.PageNum = 10; 
     }
  
-    this.router.navigate(['/showAccommodations']);
+    this.router.navigate(['/helpShowAccommodations']);
   }
 
 }

@@ -48,6 +48,7 @@ import { ShowAccommodationsComponent } from './show-accommodations/show-accommod
 import { ShowRoomReservationsComponent } from './show-room-reservations/show-room-reservations.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component';
+import { HelpSearchComponent } from './help-search/help-search.component';
 
 
 const Routes = [
@@ -73,6 +74,8 @@ const Routes = [
   {path: "register-manager", component: RegisterManagerComponent},
   {path: "showAccommodation/:Id", component: ShowAccommodatonComponent},
   {path: "showRoomReservations", component: ShowRoomReservationsComponent},
+  {path: "showAccommodations", component: ShowAccommodationsComponent},
+  {path: "helpShowAccommodations", component: HelpSearchComponent},
   {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard}
 ]
 
@@ -112,7 +115,8 @@ const Routes = [
     ShowAccommodationsComponent,
     ShowRoomReservationsComponent,
     NotificationComponent,
-    ApproveAccommodationComponent
+    ApproveAccommodationComponent,
+    HelpSearchComponent
 
   ],
   imports: [
