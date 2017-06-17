@@ -17,6 +17,8 @@ export class FilterService {
         {                 
             filter += `filter=Name eq '${filterParams.AccName}'`;
         }
+             
+        filter += `filter=Approved eq true`;       
 
         if (filterParams.Country != "")
         {

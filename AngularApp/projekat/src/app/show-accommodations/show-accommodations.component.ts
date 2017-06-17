@@ -70,6 +70,10 @@ export class ShowAccommodationsComponent implements OnInit {
     {
        FilterParamsService.filterParams.PriceMin = 0;
     }
+    if (!FilterParamsService.filterParams.Approved)
+    {
+       FilterParamsService.filterParams.Approved = true;
+    }
   
         
     let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams,1);

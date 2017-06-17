@@ -53,6 +53,7 @@ constructor(private authService: AuthService,private router: Router, private act
   onSubmit(filter: Filter, form: any){
 
     FilterParamsService.filterParams = filter;
+    FilterParamsService.filterParams.Approved = true;
 
     if (FilterParamsService.filterParams.PageNum.toString() == "")
     {
