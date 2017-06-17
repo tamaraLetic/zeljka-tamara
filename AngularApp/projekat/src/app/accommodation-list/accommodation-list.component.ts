@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Accommodation } from '../accommodation/accommodation.model';
 import { Place } from '../place/place.model';
 import { AccommodationType } from '../accommodation-type/accommodation-type.model';
@@ -36,6 +36,7 @@ export class AccommodationListComponent implements OnInit {
     this.accommodations = [];
     this.places = [];
     this.accTypes = [];
+
   }
 
   ngOnInit() {
@@ -93,4 +94,5 @@ export class AccommodationListComponent implements OnInit {
         this.file = files[0];
     }
 
+  
 }

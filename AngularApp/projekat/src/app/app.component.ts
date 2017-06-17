@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,NgZone } from '@angular/core';
 import { AuthService } from './auth.service';
 import {Filter} from './filter/filter.model';
 import {Accommodation} from './accommodation/accommodation.model';
@@ -15,12 +15,13 @@ export class AppComponent {
   title = 'app';
   user =this.isLoggedIn();
   filterParams: Filter;
-
+  isConnected: Boolean;
+  notifications: string[];
 
 constructor(private authService: AuthService,private router: Router, private activatedRoute: ActivatedRoute){
 
-  
   }
+
 
   logIn(){
     //this.authService.logIn();
@@ -60,4 +61,5 @@ constructor(private authService: AuthService,private router: Router, private act
  
     this.router.navigate(['/showAccommodations']);
   }
+
 }

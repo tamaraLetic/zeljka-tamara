@@ -1,0 +1,9 @@
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of accommodations" class="list-group-item">
+      <accommodation [accommodation]="c"></accommodation>     
+      <button *ngIf="hasRight() && !ifApproved(c.Approved)" (click)="approve(c)">Approve</button>
+     
+    </li>
+  </ul>
+</div>

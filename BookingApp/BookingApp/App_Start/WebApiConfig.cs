@@ -24,6 +24,10 @@ namespace BookingApp
             builder.EntitySet<Comment>("Comments");
             builder.EntitySet<Place>("Places");
             builder.EntitySet<Room>("Rooms");
+           // builder.EntitySet<Accommodation>("Accommodations");
+            builder.EntitySet<Country>("Countrys");
+            builder.EntitySet<Region>("Regions");
+            builder.EntitySet<RoomReservations>("RoomReservations");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
             // Web API configuration and services
@@ -31,8 +35,8 @@ namespace BookingApp
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
+           // var cors = new EnableCorsAttribute("*", "*", "*");
+           // config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

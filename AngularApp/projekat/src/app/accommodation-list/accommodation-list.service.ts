@@ -16,6 +16,11 @@ export class AccommodationService{
                
     }
 
+    getDissapproved(): Observable<any>{
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=Approved eq false`); //prima url ka nasem serveru, vraca observable objekat
+               
+    }
+
     getById(id: number):Observable<any>{
 
         return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=Id eq ${id} &$expand=AccommodationType,Rooms`).map(res=>res.json());
@@ -47,6 +52,17 @@ export class AccommodationService{
         let opts = new RequestOptions();
         opts.headers = header;
         return this.http.put(`http://localhost:${PortService.portNumber}/api/accommodations/${acc.Id}`, acc, opts);
+      }
+
+    approve(acc: Accommodation): Observable<Response>{
+
+        let header = new Headers();
+        let token = localStorage.getItem("token");
+        header.append('Content-type', 'application/json');
+        header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
+        let opts = new RequestOptions();
+        opts.headers = header;
+        return this.http.put(`http://localhost:${PortService.portNumber}/api/accommodations/approve`, acc, opts);
       }
 
     delete(id: number): Observable<Response>{
