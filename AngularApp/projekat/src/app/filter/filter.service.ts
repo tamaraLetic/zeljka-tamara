@@ -93,32 +93,40 @@ export class FilterService {
           {
             filter += `filter=`;
           }
-          filter += `AverageGrade ge ${filterParams.Grade}`;
+          filter += `AvargeGrade ge ${filterParams.Grade}`;
         }
 
-        if (filterParams.PriceMin != 0 || filterParams.PriceMax != 0)
+
+        console.log(filterParams.PriceMax);
+        console.log(filterParams.PriceMin);
+        if (filterParams.PriceMin || filterParams.PriceMax)
         {
-          let min = 0;
-          let max = 1000000;
-          if(filterParams.PriceMin)
+          if (filterParams.PriceMin != 0 || filterParams.PriceMax != 0)
           {
-            min = filterParams.PriceMin;
-          }
+            console.log(filterParams.PriceMin);
+            console.log(filterParams.PriceMax);
+            let min = 0;
+            let max = 1000000;
+            if(filterParams.PriceMin)
+            {
+              min = filterParams.PriceMin;
+            }
 
-          if(filterParams.PriceMax)
-          {
-            max = filterParams.PriceMax;
-          }
+            if(filterParams.PriceMax)
+            {
+              max = filterParams.PriceMax;
+            }
 
-          if (filter !="")
-          {
-            filter += " and ";
+            if (filter !="")
+            {
+              filter += " and ";
+            }
+            else
+            {
+              filter += `filter=`;
+            }
+            filter += `Rooms/any(r: r/PricePerNight ge ${min} and r/PricePerNight le ${max})`;
           }
-          else
-          {
-            filter += `filter=`;
-          }
-          filter += `Rooms/any(r: r/PricePerNight ge ${min} and r/PricePerNight le ${max})`;
         }
 
         if(filter != "")

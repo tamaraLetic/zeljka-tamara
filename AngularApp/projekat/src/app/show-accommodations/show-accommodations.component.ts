@@ -30,21 +30,50 @@ export class ShowAccommodationsComponent implements OnInit {
 
   ngOnInit() {
 
-    if (!FilterParamsService.filterParams.PageNum)
+    if (!FilterParamsService.filterParams.AccName)
     {
        FilterParamsService.filterParams.AccName = "";
+    }
+    if (!FilterParamsService.filterParams.AccType)
+    {
        FilterParamsService.filterParams.AccType = "";
+    }
+    if (!FilterParamsService.filterParams.BedCount)
+    {
        FilterParamsService.filterParams.BedCount = 0;
+    }
+    if (!FilterParamsService.filterParams.Country)
+    {
        FilterParamsService.filterParams.Country = "";
+    }
+    if (!FilterParamsService.filterParams.Place)
+    {
        FilterParamsService.filterParams.Place = "";
+    }
+    if (!FilterParamsService.filterParams.Grade)
+    {
        FilterParamsService.filterParams.Grade = 0;
+    }
+    if (!FilterParamsService.filterParams.PageNum)
+    {
        FilterParamsService.filterParams.PageNum = 10;
+    }
+    if (!FilterParamsService.filterParams.Region)
+    {
        FilterParamsService.filterParams.Region = "";
+    }
+    if (!FilterParamsService.filterParams.PriceMax)
+    {
        FilterParamsService.filterParams.PriceMax = 0;
+    }
+    if (!FilterParamsService.filterParams.PriceMin)
+    {
        FilterParamsService.filterParams.PriceMin = 0;
     }
+  
         
     let filterEl = this.filterService.generateQuery(FilterParamsService.filterParams,1);
+    console.log(filterEl);
     this.filterService.getAll(filterEl).subscribe(x => 
     {
       this.accLenght = x.json()["odata.count"];

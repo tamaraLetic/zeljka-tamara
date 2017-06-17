@@ -23,10 +23,10 @@ export class AccommodationService{
 
     create(acc: Accommodation, file: File): Observable<Response>
     {
+        console.log(file);
         let formData:FormData = new FormData();
         let token = localStorage.getItem("token");
         formData.append('accommodation', JSON.stringify(acc));
-        console.log(file.name);
         formData.append('uploadFile', file, file.name);
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
