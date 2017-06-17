@@ -1,37 +1,27 @@
-<h1>
+<div class="login-container" style="width:35%;" >
+  <div class="login-header">
+<h1 title="login">
   Register manager input form
 </h1>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="email">Email:</label><br>
-      <input type="text" id="email" name="email" value="" [(ngModel)]="email">
-    </div>
- 
-  <br>
-  <div>
-      <label for="pass">Password:</label><br> 
-      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass">
-  </div>
-
-  <br>
-  <div>
-      <label for="conPass">Confirm password:</label><br> 
-      <input type="text" id="conPass" name="conPass" value="" [(ngModel)]="conPass">
-  </div>
-
-  <br>
-  <div>
-      <label for="name">Name:</label><br> 
-      <input type="text" id="name" name="name" value="" [(ngModel)]="name">
-  </div>
-
-  <br>
-  <div>
-      <label for="surname">Surname:</label><br> 
-      <input type="text" id="surname" name="surname" value="" [(ngModel)]="surname">
-  </div>
+</div>
+<div class="login-form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+    
+      <input type="text" id="email" name="email" value="" [(ngModel)]="email" placeholder="Email..">
+      <br /><br />
+      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass" placeholder="Password..">
+     <br /><br />
+      <input type="text" id="conPass" name="conPass" value="" [(ngModel)]="conPass" placeholder="Confirm password..">
+   <br /><br />
+      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name..">
+     <br /><br />
+      <input type="text" id="surname" name="surname" value="" [(ngModel)]="surname" placeholder="Surename..">
+  
   <br><br>
   <div>
-      <input type="submit" value="Register">
+      <input type="submit" value="Register" title="login">
   </div>
 </form> 
+</div>
+  
+</div>

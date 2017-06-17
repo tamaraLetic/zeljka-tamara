@@ -45,8 +45,10 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
 import { FilterComponent } from './filter/filter.component';
 import { ShowAccommodatonComponent } from './show-accommodaton/show-accommodaton.component';
 import { ShowAccommodationsComponent } from './show-accommodations/show-accommodations.component';
+import { ShowRoomReservationsComponent } from './show-room-reservations/show-room-reservations.component';
 import { NotificationComponent } from './notification/notification.component';
-import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component'
+import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component';
+
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -56,7 +58,7 @@ const Routes = [
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent, AdminGuard},
   {path: "room", component: RoomListComponent, ManagerGuard},
-  {path: "roomReservations", component: RoomReservationsListComponent},
+  {path: "roomReservations/:Id", component: RoomReservationsListComponent},
   {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
   {path: "country", component: CountryListComponent, AdminGuard},
@@ -70,7 +72,7 @@ const Routes = [
   {path: "accommodationType", component: AccommodationTypeListComponent, AdminGuard},
   {path: "register-manager", component: RegisterManagerComponent},
   {path: "showAccommodation/:Id", component: ShowAccommodatonComponent},
-  {path: "showAccommodations", component: ShowAccommodationsComponent},
+  {path: "showRoomReservations", component: ShowRoomReservationsComponent},
   {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard}
 ]
 
@@ -108,6 +110,7 @@ const Routes = [
     FilterComponent,
     ShowAccommodatonComponent,
     ShowAccommodationsComponent,
+    ShowRoomReservationsComponent,
     NotificationComponent,
     ApproveAccommodationComponent
 

@@ -1,9 +1,16 @@
+<div class="alert alert-danger" *ngIf="allert">
+    <strong>Error!</strong> Start date should be smaller than end date.
+  </div>
+  <div class="alert alert-danger" *ngIf="allert2">
+    <strong>Error!</strong> This room is not available in this period.
+  </div>
 <div class="login-container" style="width:35%;" >
   <div class="login-header">
 <h1 title="login">
   Room Reservations input form
 </h1>
 </div>
+ 
 <div class="login-form">
   <form #f="ngForm" (ngSubmit)="onSubmit()">
    
@@ -11,13 +18,16 @@
      <br /><br />
       <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate" placeholder="End date">
      <br /><br />
-    <div>
+    <!--<div>
      <label for="Rooms">Room:</label><br>
        <select [(ngModel)]="selectedRooom" name="selectedRooom">
                 <option *ngFor="let x of rooms" [ngValue]="x" ><room [room]="x"></room></option>
             </select>
 
-    </div>
+    </div>-->
+    <label>Room number:</label><br>
+    <input type="text" id="room.RoomNumber" name="room.RoomNumber" [(ngModel)]="room.RoomNumber" readonly>
+    <input type="hidden" id="room.Id" name="room.Id" [(ngModel)]="room.Id" readonly>
   <br><br>
   <div>
       <input type="submit" value="Submit" title="login">
@@ -29,11 +39,11 @@
 <br><br>
 <div class="login-container" style="width:35%;">
   <ul class="list-group">
-    <li *ngFor="let c of roomReservationss" class="list-group-item">
-      <room-reservations [roomReservations]="c"></room-reservations>
+    <li *ngFor="let c of roomReservationss" class="list-group-item" >
+      <room-reservations [roomReservations]="c" *ngIf="hasRightDelete(c.AppUserId, c.Reserved)"></room-reservations>
       <!--<button (click)="hasRight(c.Id)">right</button>-->
       <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="cancelRoomReservations(c)">cancel</button>
-       <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="deleteRoomReservations(c.Id)">delete</button>
+       <button *ngIf="hasRightDelete(c.AppUserId, c.Reserved)" (click)="deleteRoomReservations(c.Id)">delete</button>
     </li>
   </ul>
 </div>

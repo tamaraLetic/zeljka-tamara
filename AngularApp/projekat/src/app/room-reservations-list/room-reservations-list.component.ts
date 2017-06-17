@@ -16,30 +16,54 @@ export class RoomReservationsListComponent implements OnInit {
   startDate: Date;
   endDate: Date;
   id: number;
-  rooms: Room[];
-  selectedRooom: Room;
+  //rooms: Room[];
+  //selectedRooom: Room;
+    room :Room;
+    idRoom: number=-1;
+    allert:boolean;
+    allert2:boolean;
 
   @Output()select: EventEmitter<string>;
 
-  constructor(private router: Router,private roomListService: RoomListService, private roomReservationsListService: RoomReservationsListService) { 
+  constructor(private router: Router,private roomListService: RoomListService, private roomReservationsListService: RoomReservationsListService, private activatedRoute: ActivatedRoute) { 
     this.roomReservationss=[];
-    this.rooms=[];
+   // this.rooms=[];
     this.select=new EventEmitter();
+    this.room=new Room();
   }
 
   ngOnInit() {
     this.roomReservationsListService.getAll().subscribe(res => this.roomReservationss=res.json());
-    this.roomListService.getAll().subscribe(res=>this.rooms = res.json());
-
+    //this.roomListService.getAll().subscribe(res=>this.rooms = res.json());
+    this.activatedRoute.params.subscribe(params=>{this.id=parseInt(params["Id"])});
+    this.roomListService.getById(this.id).subscribe(x => this.room = x  );
+    this.allert=false;
+    this.allert2=false;
   }
 
   onSubmit(){
     let token=localStorage.getItem("token");
     let userId=JSON.parse(token).id;
-    console.log(userId);
-    console.log("Room id: ", this.selectedRooom.Id);
-    this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate,true, this.selectedRooom.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
- 
+    //console.log(userId);
+    //console.log("Room id: ", this.room.Id);
+    this.allert=false;
+    this.allert2=false;
+    if(this.checkDate(this.startDate, this.endDate)){
+      if(this.validateReservation(this.startDate, this.endDate, this.room.Id)){
+          this.roomReservationsListService.create(new RoomReservations(1, this.startDate, this.endDate,true, this.room.Id, +userId)).subscribe(res => this.roomReservationss.push(res.json()));
+          this.allert2=false;
+          this.allert=false;
+      }
+      else{
+        this.allert2=true;
+        //alert("This room is not available in this period.");
+      }
+        
+    }
+    else{
+        this.allert=true;
+       // alert("Start date should be smaller than end date.");
+    }
   }
 
   deleteRoomReservations(id:number){
@@ -48,7 +72,7 @@ export class RoomReservationsListComponent implements OnInit {
 
   cancelRoomReservations(rr:RoomReservations){
     rr.Reserved=false;
-    this.roomReservationsListService.update(rr).subscribe(x=>this.router.navigate(['/roomReservations']));
+    this.roomReservationsListService.update(rr).subscribe(x=>this.router.navigate(['/roomReservations/', rr.Id]));
   /*  this.roomReservationsListService.getById(id).subscribe(x => {rr = x ;
       rr.Reserved=false;
       this.roomReservationsListService.update(rr).subscribe(x=>this.router.navigate(['/roomReservations']));
@@ -63,13 +87,27 @@ export class RoomReservationsListComponent implements OnInit {
     let auth = false;
     let userId = JSON.parse(token).id;
    
-
-    if(role=="Manager" &&  userId==id){
-      auth=true;
+    if(reserved){
+        if(role=="User" &&  userId==id){
+        auth=true;
     }
 
+    }
     
+    return auth;
+  }
 
+    hasRightDelete(id:number, reserved: boolean): boolean{
+
+    let token = localStorage.getItem("token");
+    let role = JSON.parse(token).role;
+    let auth = false;
+    let userId = JSON.parse(token).id;
+   
+    if(role=="User" &&  userId==id){
+      auth=true;
+    }
+    
     return auth;
   }
 
@@ -82,4 +120,38 @@ export class RoomReservationsListComponent implements OnInit {
     return -1;
   }
 
+  //checks if start date is smaller then end date
+  checkDate(startDate: Date, endDate: Date):boolean{
+    if(startDate && endDate){
+      if(startDate>=endDate){
+        return false;
+      
+      }
+      return true;
+    }
+    else{
+         return false;
+    }
+   
+  }
+
+
+//Checks if this room is taken in choosen period
+  validateReservation(startDate: Date, endDate: Date, roomId:number):boolean{
+    if(this.roomReservationss){
+      for(let i=0; i<this.roomReservationss.length; i++){
+        if(this.roomReservationss[i].RoomId==roomId){
+            if(((startDate<=this.roomReservationss[i].EndDate)&&(startDate>= this.roomReservationss[i].StartDate)) || ((endDate>=this.roomReservationss[i].StartDate)&&(endDate<=this.roomReservationss[i].EndDate))){
+              return false;
+            }
+            //else{
+             //   return true;
+            //}
+        }
+          
+      }
+      return true;
+    }
+      
+  }
 }
