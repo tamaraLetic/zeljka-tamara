@@ -96,9 +96,6 @@ export class FilterService {
           filter += `AvargeGrade ge ${filterParams.Grade}`;
         }
 
-
-        console.log(filterParams.PriceMax);
-        console.log(filterParams.PriceMin);
         if (filterParams.PriceMin || filterParams.PriceMax)
         {
           if (filterParams.PriceMin != 0 || filterParams.PriceMax != 0)
