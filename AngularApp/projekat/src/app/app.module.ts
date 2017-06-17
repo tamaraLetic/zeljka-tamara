@@ -44,7 +44,8 @@ import { EditAccommodationTypeComponent } from './edit-accommodation-type/edit-a
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { FilterComponent } from './filter/filter.component';
 import { ShowAccommodatonComponent } from './show-accommodaton/show-accommodaton.component';
-import { ShowAccommodationsComponent } from './show-accommodations/show-accommodations.component'
+import { ShowAccommodationsComponent } from './show-accommodations/show-accommodations.component';
+import { ShowRoomReservationsComponent } from './show-room-reservations/show-room-reservations.component'
 
 const Routes = [
   {path: "login", component: LoginComponent},
@@ -54,7 +55,7 @@ const Routes = [
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent, AdminGuard},
   {path: "room", component: RoomListComponent, ManagerGuard},
-  {path: "roomReservations", component: RoomReservationsListComponent},
+  {path: "roomReservations/:Id", component: RoomReservationsListComponent},
   {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
   {path: "country", component: CountryListComponent, AdminGuard},
@@ -68,7 +69,8 @@ const Routes = [
   {path: "accommodationType", component: AccommodationTypeListComponent, AdminGuard},
   {path: "register-manager", component: RegisterManagerComponent, ManagerGuard},
   {path: "showAccommodation/:Id", component: ShowAccommodatonComponent},
-  {path: "showAccommodations", component: ShowAccommodationsComponent}
+  {path: "showAccommodations", component: ShowAccommodationsComponent},
+  {path: "showRoomReservations", component: ShowRoomReservationsComponent}
 ]
 
 @NgModule({
@@ -104,7 +106,8 @@ const Routes = [
     EditRoomComponent,
     FilterComponent,
     ShowAccommodatonComponent,
-    ShowAccommodationsComponent
+    ShowAccommodationsComponent,
+    ShowRoomReservationsComponent
 
   ],
   imports: [

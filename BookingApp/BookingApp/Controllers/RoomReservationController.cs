@@ -116,7 +116,18 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            //check validation of room reservation addded
+            foreach (RoomReservations item in db.RoomReservations)
+            {
+                if (item.RoomId == roomReservations.RoomId)
+                {
+                    if (((roomReservations.StartDate<=item.EndDate) && (roomReservations.StartDate>=item.StartDate)) || ((roomReservations.EndDate>=item.StartDate) && (roomReservations.EndDate<=item.EndDate)))
+                    {
+                        return BadRequest();
+                    }
+                }
+               
+            }
             db.RoomReservations.Add(roomReservations);
             db.SaveChanges();
 

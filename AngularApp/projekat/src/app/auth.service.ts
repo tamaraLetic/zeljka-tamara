@@ -74,7 +74,7 @@ export class AuthService{
         let role = JSON.parse(token).role;
         let auth = false;
 
-        if (role=="AppUser")
+        if (role=="User")
         {
             auth = true;
         }

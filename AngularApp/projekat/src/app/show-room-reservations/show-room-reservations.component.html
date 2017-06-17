@@ -1,0 +1,10 @@
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of roomReservationss" class="list-group-item" >
+      <room-reservations [roomReservations]="c" *ngIf="hasRightDelete(c.AppUserId, c.Reserved)"></room-reservations>
+      <!--<button (click)="hasRight(c.Id)">right</button>-->
+      <button *ngIf="hasRight(c.AppUserId, c.Reserved)" (click)="cancelRoomReservations(c)">cancel</button>
+       <button *ngIf="hasRightDelete(c.AppUserId, c.Reserved)" (click)="deleteRoomReservations(c.Id)">delete</button>
+    </li>
+  </ul>
+</div>
