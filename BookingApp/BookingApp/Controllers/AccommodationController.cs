@@ -15,6 +15,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.OData;
+using BookingApp.Hubs;
 
 namespace BookingApp.Controllers
 {
@@ -119,6 +120,38 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        [Route("Accommodations/approve")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Approve(Accommodation accommodation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(accommodation).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccommodationExists(accommodation.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         [Authorize(Roles = "Manager")]
         [HttpPost]
         [Route("Accommodations")]
@@ -161,6 +194,8 @@ namespace BookingApp.Controllers
 
             db.Accommodations.Add(accommodation);
             db.SaveChanges();
+
+            Notification.NotifyAdmin(accommodation.Id);
 
             return CreatedAtRoute("DefaultApi", new {controller = "Accommodation", id = accommodation.Id }, accommodation);
         }

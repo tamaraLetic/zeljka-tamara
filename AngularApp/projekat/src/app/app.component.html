@@ -53,6 +53,9 @@
 			   <li *ngIf="isLoggedIn()">
 				  <a class="tablinks" [routerLink]="['/roomReservations']">Room reservations</a>
               </li>
+         <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/approveAccommodations']">Approve accommodation</a>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -107,7 +110,11 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-<div style="">
+<div >
+
+  <div *ngIf="isLoggedIn()">
+    <notification></notification>
+  </div>
     
 <router-outlet></router-outlet>
 </div>
