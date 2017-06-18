@@ -1,0 +1,8 @@
+<div class="login-container" style="width:35%;">
+  <ul class="list-group">
+    <li *ngFor="let c of users" class="list-group-item">
+      <appuser [appuser]="c"></appuser>
+       <button *ngIf="hasRight()" (click)="banUser(c.Id)">Ban/Unban</button>
+    </li>
+  </ul>
+</div>

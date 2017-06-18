@@ -1,9 +1,11 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Accommodation } from '../accommodation/accommodation.model';
 import { Place } from '../place/place.model';
+import { AppUser } from '../appuser/appuser.model';
 import { AccommodationType } from '../accommodation-type/accommodation-type.model';
 import { AccommodationTypeListService } from '../accommodation-type-list/accommodation-type-list.service';
 import { PlaceListService } from '../place-list/place-list.service';
+import { BanManagerService } from '../ban-manager/ban-manager.service';
 import {AccommodationService} from './accommodation-list.service';
 
 @Component({
@@ -11,7 +13,7 @@ import {AccommodationService} from './accommodation-list.service';
   templateUrl: './accommodation-list.component.html',
   styleUrls: ['./accommodation-list.component.css'],
   styles: ['agm-map {height: 300px; width: 500px;}'], //postavljamo sirinu i visinu mape
-  providers:[AccommodationService,PlaceListService,AccommodationTypeListService] //dodali servis
+  providers:[AccommodationService,PlaceListService,AccommodationTypeListService,BanManagerService] //dodali servis
 })
 export class AccommodationListComponent implements OnInit {
 
@@ -29,25 +31,32 @@ export class AccommodationListComponent implements OnInit {
   places: Place [];
   accTypes: AccommodationType [];
 
+  manager : AppUser;
   file: File;
 
-   constructor(private accService: AccommodationService, private placeService: PlaceListService, private accTypeService: AccommodationTypeListService) { 
+   constructor(private accService: AccommodationService, private placeService: PlaceListService, private accTypeService: AccommodationTypeListService, private banService: BanManagerService) { 
 
     this.accommodations = [];
     this.places = [];
     this.accTypes = [];
-
+    this.manager = new AppUser;
   }
 
   ngOnInit() {
 
+    let token = localStorage.getItem("token");
+    let id = JSON.parse(token).id;
+    this.banService.getManagerById(id).subscribe(x => 
+    {
+      this.manager = x.json();
+    });
     this.accService.getAll().subscribe(res => 
     {
       this.accommodations = res.json();
       
     });
     this.placeService.getAll().subscribe(res => this.places = res.json());
-    this.accTypeService.getAll().subscribe(res => this.accTypes = res.json());
+    this.accTypeService.getAll().subscribe(res => this.accTypes = res.json()); 
   }
 
   onSubmit(){
@@ -95,4 +104,8 @@ export class AccommodationListComponent implements OnInit {
     }
 
   
+  isBaned(){
+
+    return !this.manager.Baned;
+  }
 }

@@ -6,7 +6,7 @@
 </h1>
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" *ngIf="isBaned()">
     
       <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
    <br /><br />
@@ -42,7 +42,7 @@
    
   <br><br>
   <div>
-      <input type="submit" value="Submit" title="login">
+      <input type="submit" value="Submit">
        
       <input type="reset" value="Clear" title="login">
   </div>

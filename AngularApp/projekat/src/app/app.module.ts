@@ -49,8 +49,9 @@ import { ShowRoomReservationsComponent } from './show-room-reservations/show-roo
 import { NotificationComponent } from './notification/notification.component';
 import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component';
 import { HelpSearchComponent } from './help-search/help-search.component';
-//import { BanManagerComponent } from './ban-manager/ban-manager.component';
 import { ShowReviewsComponent } from './show-reviews/show-reviews.component';
+import { BanManagerComponent } from './ban-manager/ban-manager.component';
+import { AppuserComponent } from './appuser/appuser.component';
 
 
 
@@ -82,7 +83,7 @@ const Routes = [
   {path: "showReviews/:Id", component: ShowReviewsComponent},
   {path: "helpShowAccommodations", component: HelpSearchComponent},
   {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard},
-//  {path: "banManager", component: BanManagerComponent, AdminGuard}
+  {path: "banManager", component: BanManagerComponent, AdminGuard}
 ]
 
 @NgModule({
@@ -123,7 +124,9 @@ const Routes = [
     NotificationComponent,
     ApproveAccommodationComponent,
     HelpSearchComponent,
-    ShowReviewsComponent
+    ShowReviewsComponent,
+    BanManagerComponent,
+    AppuserComponent
 
   ],
   imports: [

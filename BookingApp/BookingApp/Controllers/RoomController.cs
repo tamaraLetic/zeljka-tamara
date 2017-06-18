@@ -114,6 +114,20 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(Room))]
         public IHttpActionResult PostRoom(Room room)
         {
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            if (baUser.appUser.Baned)
+            {
+                return Unauthorized();
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
