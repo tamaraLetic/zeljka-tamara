@@ -55,4 +55,9 @@ export class RoomReservationsListService{
         opts.headers = header;
         return this.http.delete(`http://localhost:${PortService.portNumber}/api/roomreservations/${id}`, opts);
     }
+      //vrati sve room reservation-e gde je taj user i gde je room.AccommodationId taj prosledjens
+      getAllFiltered(appUserId: number): Observable<any>{
+
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/roomreservations?$filter=AppUserId eq  ${appUserId} &$expand=Room`).map(res=>res.json()); //prima url ka nasem serveru, vraca observable objekat               
+    }
 }
