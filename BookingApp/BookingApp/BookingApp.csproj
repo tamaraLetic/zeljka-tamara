@@ -290,6 +290,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\RoomReservationController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
@@ -367,6 +368,10 @@
     <Compile Include="Migrations\201706140709124_Added bool to RoomReservation.cs" />
     <Compile Include="Migrations\201706140709124_Added bool to RoomReservation.Designer.cs">
       <DependentUpon>201706140709124_Added bool to RoomReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706181327365_appUser ban.cs" />
+    <Compile Include="Migrations\201706181327365_appUser ban.Designer.cs">
+      <DependentUpon>201706181327365_appUser ban.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
@@ -518,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706140709124_Added bool to RoomReservation.resx">
       <DependentUpon>201706140709124_Added bool to RoomReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181327365_appUser ban.resx">
+      <DependentUpon>201706181327365_appUser ban.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

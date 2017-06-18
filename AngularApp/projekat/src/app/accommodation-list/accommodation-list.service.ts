@@ -16,6 +16,11 @@ export class AccommodationService{
                
     }
 
+    getAllManagerAcc(userId: number): Observable<any>{
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=AppUserId eq ${userId}`); //prima url ka nasem serveru, vraca observable objekat
+               
+    }
+
     getDissapproved(): Observable<any>{
         return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=Approved eq false`); //prima url ka nasem serveru, vraca observable objekat
                

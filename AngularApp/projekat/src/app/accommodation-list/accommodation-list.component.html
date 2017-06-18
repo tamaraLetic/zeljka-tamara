@@ -58,7 +58,7 @@
       <accommodation [accommodation]="c"></accommodation>     
       <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/editAccommodation/', c.Id]">edit</button>
       <button *ngIf="hasRight(c.AppUserId)" (click)="delete(c.Id)">delete</button>
-     
+      <button *ngIf="hasRight(c.AppUserId)" [routerLink]= "['/rooms/', c.Id]">Rooms</button>
     </li>
   </ul>
 </div>

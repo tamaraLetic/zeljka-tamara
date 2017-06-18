@@ -49,6 +49,7 @@ import { ShowRoomReservationsComponent } from './show-room-reservations/show-roo
 import { NotificationComponent } from './notification/notification.component';
 import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component';
 import { HelpSearchComponent } from './help-search/help-search.component';
+import { BanManagerComponent } from './ban-manager/ban-manager.component';
 
 
 const Routes = [
@@ -59,6 +60,7 @@ const Routes = [
   {path: "logout", component: LogoutComponent},
   {path: "region", component: RegionListComponent, AdminGuard},
   {path: "room", component: RoomListComponent, ManagerGuard},
+  {path: "rooms/:Id", component: RoomListComponent, ManagerGuard},
   {path: "roomReservations/:Id", component: RoomReservationsListComponent},
   {path: "comment", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
@@ -76,7 +78,8 @@ const Routes = [
   {path: "showRoomReservations", component: ShowRoomReservationsComponent},
   {path: "showAccommodations", component: ShowAccommodationsComponent},
   {path: "helpShowAccommodations", component: HelpSearchComponent},
-  {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard}
+  {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard},
+  {path: "banManager", component: BanManagerComponent, AdminGuard}
 ]
 
 @NgModule({

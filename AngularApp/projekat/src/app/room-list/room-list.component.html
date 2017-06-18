@@ -24,9 +24,7 @@
     <br><br /><br />
     <div>
       <label for="Accommodation">Accommodation:</label><br>
-       <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
-                <option *ngFor="let x of accommodations" [ngValue]="x" ><accommodation [accommodation]="x"></accommodation></option>
-            </select>
+     <input type="text" name = "selectedAccommodation.Name" [(ngModel)]="selectedAccommodation.Name" readonly>
 
     </div>
   <br><br>
@@ -42,8 +40,8 @@
   <ul class="list-group">
     <li *ngFor="let c of rooms" class="list-group-item">
       <room [room]="c"></room>
-      <button *ngIf="hasRight()" [routerLink]= "['/editRoom/', c.Id]">edit</button>
-      <button *ngIf="hasRight()" (click)="deleteRoom(c.Id)">delete</button>
+      <button *ngIf="hasRight(c.AccommodationId)" [routerLink]= "['/editRoom/', c.Id]">edit</button>
+      <button *ngIf="hasRight(c.AccommodationId)" (click)="deleteRoom(c.Id)">delete</button>
     </li>
   </ul>
 </div>

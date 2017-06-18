@@ -44,9 +44,6 @@
 			   <li *ngIf="isLoggedIn() && isAdmin()">
 				  <a class="tablinks" [routerLink]="['/accommodationType']">Accommodation type</a>
               </li>
-			   <li *ngIf="isLoggedIn() && isManager()">
-				  <a class="tablinks" [routerLink]="['/room']">Room</a>
-              </li>
 			   <li *ngIf="isLoggedIn()">
 				  <a class="tablinks" [routerLink]="['/comment']">Comment</a>
               </li>
@@ -55,6 +52,9 @@
               </li>
          <li *ngIf="isLoggedIn() && isAdmin()">
 				  <a class="tablinks" [routerLink]="['/approveAccommodations']">Approve accommodation</a>
+              </li>
+          <li *ngIf="isLoggedIn() && isAdmin()">
+				  <a class="tablinks" [routerLink]="['/banManager']">Ban manager</a>
               </li>
             </ul>
           </div><!--/.nav-collapse -->
