@@ -10,15 +10,15 @@
      
       <input type="text" id="text" name="text" value="" [(ngModel)]="text" placeholder="Tekst">
 <br /><br />
-   
-      <input type="text" id="grade" name="grade" value="" [(ngModel)]="grade" placeholder="Grade">
+      <input type="text" id="grade" name="grade" value="" [(ngModel)]="grade" placeholder="Grade (1-5)">
    <br /><br />
     <div>
      <label for="Accommodation">Accommodation:</label><br>
-       <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
+      <!-- <select [(ngModel)]="selectedAccommodation" name="selectedAccommodation">
                 <option *ngFor="let x of accommodations" [ngValue]="x" ><accommodation [accommodation]="x"></accommodation></option>
-            </select>
-
+            </select>-->
+        <input type="text" id="accName" name="accName" value="" [(ngModel)]="accName" readonly>
+        <input type="hidden" id="selectedAccommodation" name="selectedAccommodation" value="" [(ngModel)]="selectedAccommodation" >
     </div>
   <br><br>
   <div>
@@ -34,7 +34,7 @@
     <li *ngFor="let c of comments" class="list-group-item">
       <comment [comment]="c"></comment>
       <!--<button *ngIf="hasRight()" [routerLink]= "['/editComment/', c.Id]">edit</button>-->
-      <button *ngIf="hasRight()" (click)="deleteComment(c.Id)">delete</button>
+      <button *ngIf="hasRight(c.AppUserId)" (click)="deleteComment(c.AppUserId,c.AccommodationId)">delete</button>
     </li>
   </ul>
 </div>

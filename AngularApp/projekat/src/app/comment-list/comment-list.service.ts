@@ -45,7 +45,7 @@ export class CommentListService{
         return this.http.put(`http://localhost:${PortService.portNumber}/api/comments/${comment.Id}`, comment, opts);
       }
 
-    delete(id: number): Observable<Response>{
+    delete(appUserId: number, accommodationId:number): Observable<Response>{
 
         let header = new Headers();
         let token = localStorage.getItem("token");
@@ -53,6 +53,6 @@ export class CommentListService{
         header.append('Authorization', 'Bearer ' + JSON.parse(token).token);
         let opts = new RequestOptions();
         opts.headers = header;
-        return this.http.delete(`http://localhost:${PortService.portNumber}/api/comments/${id}`, opts);
+        return this.http.delete(`http://localhost:${PortService.portNumber}/api/comments/${appUserId},${accommodationId}`, opts);
     }
 }

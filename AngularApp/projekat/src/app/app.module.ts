@@ -50,6 +50,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { ApproveAccommodationComponent } from './approve-accommodation/approve-accommodation.component';
 import { HelpSearchComponent } from './help-search/help-search.component';
 import { BanManagerComponent } from './ban-manager/ban-manager.component';
+import { ShowReviewsComponent } from './show-reviews/show-reviews.component';
+
 
 
 const Routes = [
@@ -62,7 +64,7 @@ const Routes = [
   {path: "room", component: RoomListComponent, ManagerGuard},
   {path: "rooms/:Id", component: RoomListComponent, ManagerGuard},
   {path: "roomReservations/:Id", component: RoomReservationsListComponent},
-  {path: "comment", component: CommentListComponent},
+  {path: "comment/:Id", component: CommentListComponent},
   {path: "editRegion/:Id", component: EditRegionComponent, AdminGuard},
   {path: "country", component: CountryListComponent, AdminGuard},
   {path: "editCountry/:Id", component: EditCountryComponent, AdminGuard},
@@ -77,6 +79,7 @@ const Routes = [
   {path: "showAccommodation/:Id", component: ShowAccommodatonComponent},
   {path: "showRoomReservations", component: ShowRoomReservationsComponent},
   {path: "showAccommodations", component: ShowAccommodationsComponent},
+  {path: "showReviews/:Id", component: ShowReviewsComponent},
   {path: "helpShowAccommodations", component: HelpSearchComponent},
   {path: "approveAccommodations", component: ApproveAccommodationComponent, AdminGuard},
   {path: "banManager", component: BanManagerComponent, AdminGuard}
@@ -119,7 +122,8 @@ const Routes = [
     ShowRoomReservationsComponent,
     NotificationComponent,
     ApproveAccommodationComponent,
-    HelpSearchComponent
+    HelpSearchComponent,
+    ShowReviewsComponent
 
   ],
   imports: [

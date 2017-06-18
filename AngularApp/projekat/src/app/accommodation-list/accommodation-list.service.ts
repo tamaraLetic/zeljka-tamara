@@ -33,7 +33,7 @@ export class AccommodationService{
 
     getById(id: number):Observable<any>{
 
-        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=Id eq ${id} &$expand=AccommodationType,Rooms`).map(res=>res.json());
+        return this.http.get(`http://localhost:${PortService.portNumber}/api/accommodations?$filter=Id eq ${id} &$expand=AccommodationType,Rooms,Comments`).map(res=>res.json());
     }
 
     create(acc: Accommodation, file: File): Observable<Response>
