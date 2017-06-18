@@ -1,15 +1,19 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Comment} from '../comment/comment.model';
+import {Room} from '../room/room.model';
 import {Accommodation} from '../accommodation/accommodation.model';
 import {CommentListService} from './comment-list.service';
 import {AccommodationService} from '../accommodation-list/accommodation-list.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import {RoomReservationsListService} from '../room-reservations-list/room-reservations-list.service';
+import {RoomReservations} from '../room-reservations/room-reservations.model';
+
 
 @Component({
   selector: 'comment-list',
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.css'],
-  providers:[CommentListService, AccommodationService] //dodali servis
+  providers:[CommentListService, AccommodationService,RoomReservationsListService] //dodali servis
 })
 export class CommentListComponent implements OnInit {
 
@@ -23,7 +27,7 @@ export class CommentListComponent implements OnInit {
 
   @Output()select: EventEmitter<string>;
 
-   constructor(private commentListService: CommentListService, private accommodationService: AccommodationService,private router: Router, private activatedRoute: ActivatedRoute) { 
+   constructor(private commentListService: CommentListService, private accommodationService: AccommodationService,private router: Router, private activatedRoute: ActivatedRoute, private roomReservationsListService:RoomReservationsListService) { 
 
     this.comments=[]  
    // this.accommodations=[]
@@ -51,7 +55,10 @@ export class CommentListComponent implements OnInit {
     let token=localStorage.getItem("token");
     let userId=JSON.parse(token).id;
     console.log(userId);
-    this.commentListService.create(new Comment(1, this.grade, this.text, this.selectedAccommodation.Id, +userId)).subscribe(res => this.comments.push(res.json()));
+    this.canHeComent(userId, this.selectedAccommodation.Id);
+         
+    
+   
   }
 
   deleteComment(appUserId: number, accommodationId:number){
@@ -83,5 +90,44 @@ export class CommentListComponent implements OnInit {
     }
     return -1;
   }
+  canHeComent(appUserId:number, accommodationId:number){
+    let roomReservations=[];
+    let rooms=[];
+    
+    this.roomReservationsListService.getAllFiltered(appUserId).subscribe(res=>{
+      roomReservations=res;
+      //console.log(roomReservations);
+      if(roomReservations){
+          if(roomReservations.length>0){
+              for(let i=0; i<roomReservations.length; i++){
+                if(roomReservations[i].Reserved==true){
+                    rooms[i]=roomReservations[i].Room;
+                }
+                  
+              }
 
+              if(rooms){
+              //  console.log("Roooooms: "+rooms);
+                for(let j=0; j<rooms.length; j++){
+                  //pise da je AccommodationId undefined
+                  console.log(rooms);
+                  if(rooms[j]){
+                       if((rooms[j] as Room).AccommodationId==accommodationId){
+                            //return true;
+                            this.commentListService.create(new Comment(1, this.grade, this.text, this.selectedAccommodation.Id, +appUserId)).subscribe(res => this.comments.push(res.json()));
+ 
+                    }
+                  }
+                   
+                }
+                //return false;
+              }
+          }
+     
+      }
+      //return false;
+    
+    });
+
+   } 
 }
