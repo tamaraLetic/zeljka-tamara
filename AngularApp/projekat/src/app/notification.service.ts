@@ -13,16 +13,16 @@ export class NotificationService {
     private connection: any;  
 
     // create the Event Emitter  
-    public notificationReceived: EventEmitter < string >;  
+    public notificationReceivedAdmin: EventEmitter < string >;  
+    public notificationReceivedManager: EventEmitter < string >;
     public connectionEstablished: EventEmitter < Boolean >;  
-    public timeReceived: EventEmitter< string >;
     public connectionExists: Boolean;  
    
     constructor() {  
         // Constructor initialization  
         this.connectionEstablished = new EventEmitter < Boolean > ();  
-        this.notificationReceived = new EventEmitter < string > (); 
-        this.timeReceived = new EventEmitter < string > (); 
+        this.notificationReceivedAdmin = new EventEmitter < string > (); 
+        this.notificationReceivedManager = new EventEmitter < string > (); 
         this.connectionExists = false;  
         // create hub connection  
         this.connection = $.hubConnection(`http://localhost:${PortService.portNumber}/`);  
@@ -30,6 +30,7 @@ export class NotificationService {
         this.proxy = this.connection.createHubProxy(this.proxyName);  
         // register on server events  
         this.registerOnServerEvents();
+        this.registerOnManagerServerEvents();
         // call the connecion start method to start the connection to send and receive events. 
         this.startConnection(); 
         
@@ -58,9 +59,18 @@ export class NotificationService {
         this.proxy.on('checkAccNotification', (data: string) => {  
             alert("Received notification: Added new accommodation, you need to approve it!");
             console.log('received notification: ' + data);  
-            this.notificationReceived.emit(data);  
+            this.notificationReceivedAdmin.emit(data);  
         }); 
     }  
+
+    private registerOnManagerServerEvents(): void {  
+        
+        this.proxy.on('managerNotification', (data: string) => {  
+            alert("Received notification: Your accommodation has been approved!");
+            console.log('received notification: ' + data);  
+            this.notificationReceivedManager.emit(data);  
+        }); 
+    } 
 
     public sendHello() {  
         // server side hub method using proxy.invoke with method name pass as param  

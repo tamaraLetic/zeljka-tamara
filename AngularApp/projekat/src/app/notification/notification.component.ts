@@ -32,7 +32,8 @@ export class NotificationComponent implements OnInit {
   }
 
   private subscribeForNotifications () {
-    this.notifService.notificationReceived.subscribe(e => this.onNotification(e));
+    this.notifService.notificationReceivedAdmin.subscribe(e => this.onNotification(e));
+    this.notifService.notificationReceivedManager.subscribe(e => this.onNotification(e));
   }
 
   public onNotification(notif: string) {

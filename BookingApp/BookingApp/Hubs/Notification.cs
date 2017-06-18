@@ -22,6 +22,10 @@ namespace BookingApp.Hubs
             hubContext.Clients.Group("Admins").checkAccNotification(accId);
         }
 
+        public static void NotifyManager(int idManager)
+        {
+            hubContext.Clients.Group(idManager.ToString()).managerNotification();
+        }
 
         public void Register(string id, string role)
         {
