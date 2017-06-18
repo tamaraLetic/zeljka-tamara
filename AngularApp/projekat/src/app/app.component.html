@@ -47,9 +47,9 @@
 			   <li *ngIf="isLoggedIn() && isManager()">
 				  <a class="tablinks" [routerLink]="['/room']">Room</a>
               </li>
-			   <li *ngIf="isLoggedIn()">
+			  <!-- <li *ngIf="isLoggedIn()">
 				  <a class="tablinks" [routerLink]="['/comment']">Comment</a>
-              </li>
+              </li>-->
 			   <li *ngIf="isLoggedIn()">
 				  <a class="tablinks" [routerLink]="['/showRoomReservations']">Room reservations</a>
               </li>

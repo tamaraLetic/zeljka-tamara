@@ -17,7 +17,8 @@
         </div>
 
         <hr class="featurette-divider">
-
+        <a class="btn btn-primary" *ngIf="isLoggedIn() && isUser()" href="#" [routerLink]="['/showReviews/', acc.Id]">Reviews<span class="glyphicon glyphicon-chevron-right"></span></a>
+            
         <div class="featurette" id="services">
             <br>
             <h2 class="featurette-heading">We have great grades!
@@ -41,9 +42,11 @@
 
 
         <h2 class="featurette-heading" class="text-muted">Reserve your room!</h2>
+        <hr class="style17">
         <div class="row" *ngFor="let x of rooms">
+            
             <div >
-                <h3 class="featurette-heading">Room number:
+                <h3 class="featurette">Room number:
                     <span class="text-muted">{{x.RoomNumber}}</span>
                 </h3>
                 <h3 class="featurette">Facilities:
@@ -57,6 +60,7 @@
                 </h3>
                 <a class="btn btn-primary" *ngIf="isLoggedIn() && isUser()" href="#" [routerLink]="['/roomReservations/', x.Id]">Book Now! <span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
+            <hr class="style17">
         </div>
         <hr class="featurette-divider">
 

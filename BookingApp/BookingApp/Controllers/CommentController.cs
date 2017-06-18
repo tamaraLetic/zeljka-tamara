@@ -133,11 +133,11 @@ namespace BookingApp.Controllers
 
         [Authorize (Roles = "AppUser")]
         [HttpDelete]
-        [Route("Comments/{id}")]
+        [Route("Comments/{id},{ida}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(int id)
+        public IHttpActionResult DeleteComment(int id, int ida)
         {
-            Comment comment = db.Comments.Find(id);
+            Comment comment = db.Comments.Find(id,ida);
             if (comment == null)
             {
                 return NotFound();
