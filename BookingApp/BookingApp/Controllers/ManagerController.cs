@@ -1,10 +1,13 @@
 ﻿using BookingApp.Models;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -33,6 +36,20 @@ namespace BookingApp.Controllers
         }
 
         [HttpGet]
+        [Route("getmanager/{id}")]
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult m2(int id)
+        {
+            AppUser user = db.AppUsers.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         [Route("getuser")]
         public List<AppUser> GetUser()
@@ -49,6 +66,51 @@ namespace BookingApp.Controllers
             }
 
             return appUsers;
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        [Route("banmanager")]
+        public IHttpActionResult BanManager(AppUser user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(user.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool UserExists(int id)
+        {
+            return db.AppUsers.Count(e => e.Id == id) > 0;
         }
     }
 }

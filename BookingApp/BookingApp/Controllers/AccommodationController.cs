@@ -158,7 +158,21 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult PostAccommodation()
         {
-            Accommodation accommodation = new Accommodation();         
+            Accommodation accommodation = new Accommodation();
+
+            IdentityUser user = UserManager.FindById(User.Identity.GetUserId());
+            BAIdentityUser baUser = new BAIdentityUser();
+            baUser = user as BAIdentityUser;
+
+            if (baUser == null)
+            {
+                return null;
+            }
+
+            if (baUser.appUser.Baned)
+            {
+                return Unauthorized();
+            }
 
             if (!ModelState.IsValid)
             {
