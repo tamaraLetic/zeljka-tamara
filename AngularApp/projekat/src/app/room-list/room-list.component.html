@@ -5,21 +5,21 @@
 </h1>
  </div>
  <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
  
-      <input type="text" id="roomNum" name="roomNum" value="" [(ngModel)]="roomNum" placeholder="Room number" >
+      <input type="text" id="roomNum" name="roomNum" value="" [(ngModel)]="roomNum" placeholder="Room number" required>
  
       <br /><br />
       
-      <input type="text" id="bedCount" name="bedCount" value="" [(ngModel)]="bedCount" placeholder="Bed count">
+      <input type="text" id="bedCount" name="bedCount" value="" [(ngModel)]="bedCount" placeholder="Bed count" required>
     
     <br /><br />
    
-      <input type="text" id="description" name="description" value="" [(ngModel)]="description" placeholder="Description">
+      <input type="text" id="description" name="description" value="" [(ngModel)]="description" placeholder="Description" required>
    
    <br /><br />
  
-      <input type="text" id="pricePerNight" name="pricePerNight" value="" [(ngModel)]="pricePerNight" placeholder="Price per night">
+      <input type="text" id="pricePerNight" name="pricePerNight" value="" [(ngModel)]="pricePerNight" placeholder="Price per night" required>
   
     <br><br /><br />
     <div>

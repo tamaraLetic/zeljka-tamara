@@ -6,13 +6,13 @@
   </h1>
   </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" ngNativeValidate>
     
-      <input type="text" id="acc.Name" name="acc.Name" [(ngModel)]="acc.Name">
+      <input type="text" id="acc.Name" name="acc.Name" [(ngModel)]="acc.Name" required>
       <br /><br />
-      <input type="text" id="acc.Description" name="acc.Description" [(ngModel)]="acc.Description">
+      <input type="text" id="acc.Description" name="acc.Description" [(ngModel)]="acc.Description" required>
    <br /><br />
-      <input type="text" id="acc.Address" name="acc.Address"[(ngModel)]="acc.Address">
+      <input type="text" id="acc.Address" name="acc.Address"[(ngModel)]="acc.Address" required>
 
    
   <br><br>

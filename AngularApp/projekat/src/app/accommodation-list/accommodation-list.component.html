@@ -6,24 +6,24 @@
 </h1>
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" *ngIf="isBaned()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" *ngIf="isBaned()" ngNativeValidate>
     
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name" required>
    <br /><br />
-      <input type="text" id="desc" name="desc" value="" [(ngModel)]="Description" placeholder="Description">
+      <input type="text" id="desc" name="desc" value="" [(ngModel)]="Description" placeholder="Description" required>
    <br /><br />
-      <input type="text" id="address" name="address" value="" [(ngModel)]="Address" placeholder="Address">
+      <input type="text" id="address" name="address" value="" [(ngModel)]="Address" placeholder="Address" required>
   <br /><br />
-      <input type="text" id="lat" name="desc" lat="" [(ngModel)]="Latitude" placeholder="Latitude">
+      <input type="number" id="lat" name="desc" lat="" [(ngModel)]="Latitude" placeholder="Latitude" required>
    <br /><br />
  
-      <input type="text" id="long" name="long" value="" [(ngModel)]="Longitude" placeholder="Longitude">
+      <input type="number" id="long" name="long" value="" [(ngModel)]="Longitude" placeholder="Longitude" required>
   <br /><br />
-      <input  type="file" name="ImageURL" id="ImageURL" (change)="onChange($event)" />
+      <input  type="file" name="ImageURL" id="ImageURL" (change)="onChange($event)" required/>
   <br /><br />
   <div>
       <label for="places">Place:</label><br>
-       <select [(ngModel)]="SelectedPlace" name="SelectedPlace">
+       <select [(ngModel)]="SelectedPlace" name="SelectedPlace" required>
                 <option *ngFor="let x of places" [ngValue]="x" ><place [place]="x"></place></option>
             </select>
 
@@ -31,7 +31,7 @@
     <br>
     <div>
       <label for="accTypes">Accommodation type:</label><br>
-       <select [(ngModel)]="SelectedAccType" name="SelectedAccType">
+       <select [(ngModel)]="SelectedAccType" name="SelectedAccType" required>
                 <option *ngFor="let x of accTypes" [ngValue]="x" >
                     <accommodation-type [accommodationType]="x"></accommodation-type>
                 </option>

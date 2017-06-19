@@ -4,10 +4,10 @@
     <h1 title="login">Login</h1>
   </div>
   <div class="login-form">
-    <form #f="ngForm" (ngSubmit)="onSubmit()">
-      <input type="text" id="email" name="email" value="" [(ngModel)]="email" placeholder="Username" />
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+      <input type="text" id="email" name="email"  value="" [(ngModel)]="email" placeholder="Username" required/>
       <br /><br />
-      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass" placeholder="Password" />
+      <input type="password" id="pass" name="pass" value="" [(ngModel)]="pass" placeholder="Password" required/>
       <br /><br />
       <input title="login" type="submit" value="Login" />
       <br /><br />

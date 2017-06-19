@@ -5,16 +5,16 @@
 </h1>
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
     <div> 
       <label for="Name">Name:</label><br>
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name" required>
     </div>
  
   <br>
   <div>
       <label for="Code">Code:</label><br> 
-      <input type="text" id="Code" name="Code" value="" [(ngModel)]="Code" placeholder="Code">
+      <input type="text" id="Code" name="Code" value="" [(ngModel)]="Code" placeholder="Code" required>
   </div>
    
   <br><br>

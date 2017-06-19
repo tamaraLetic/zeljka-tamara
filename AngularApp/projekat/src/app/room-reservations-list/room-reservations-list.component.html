@@ -12,11 +12,11 @@
 </div>
  
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
    
-      <input type="date" id="startDate" name="startDate" value="" [(ngModel)]="startDate" placeholder="Start date">
+      <input type="date" id="startDate" name="startDate" value="" [(ngModel)]="startDate" placeholder="Start date" required>
      <br /><br />
-      <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate" placeholder="End date">
+      <input type="date" id="endDate" name="endDate" value="" [(ngModel)]="endDate" placeholder="End date" required>
      <br /><br />
     <!--<div>
      <label for="Rooms">Room:</label><br>

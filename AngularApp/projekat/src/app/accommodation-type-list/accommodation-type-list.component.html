@@ -5,9 +5,9 @@
     </h1>
   </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
   
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name" required>
     
   <br><br>
   <div>

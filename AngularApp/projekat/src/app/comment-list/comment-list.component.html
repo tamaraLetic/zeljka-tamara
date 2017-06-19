@@ -5,12 +5,12 @@
 </h1>
   </div>
   <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
   
      
-      <input type="text" id="text" name="text" value="" [(ngModel)]="text" placeholder="Tekst">
+      <input type="text" id="text" name="text" value="" [(ngModel)]="text" placeholder="Tekst" required>
 <br /><br />
-      <input type="text" id="grade" name="grade" value="" [(ngModel)]="grade" placeholder="Grade (1-5)">
+      <input type="number" min="1" max="5" id="grade" name="grade" value="" [(ngModel)]="grade" placeholder="Grade (1-5)" required>
    <br /><br />
     <div>
      <label for="Accommodation">Accommodation:</label><br>

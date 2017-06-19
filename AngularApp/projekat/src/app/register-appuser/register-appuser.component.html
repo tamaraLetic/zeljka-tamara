@@ -5,17 +5,17 @@
 </h1>
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" ngNativeValidate>
    
-      <input type="text" id="email" name="email" value="" [(ngModel)]="email" placeholder="Email..">
+      <input type="email" id="email" name="email" value="" [(ngModel)]="email" placeholder="Email.." required>
       <br /><br />
-      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass" placeholder="Password..">
+      <input type="text" id="pass" name="pass" value="" [(ngModel)]="pass" placeholder="Password.." required>
      <br /><br />
-      <input type="text" id="conPass" name="conPass" value="" [(ngModel)]="conPass" placeholder="Confirm password..">
+      <input type="text" id="conPass" name="conPass" value="" [(ngModel)]="conPass" placeholder="Confirm password.." required>
    <br /><br />
-      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name..">
+      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name.." required>
      <br /><br />
-      <input type="text" id="surname" name="surname" value="" [(ngModel)]="surname" placeholder="Surename..">
+      <input type="text" id="surname" name="surname" value="" [(ngModel)]="surname" placeholder="Surename.." required>
  
   <br><br>
   <div>

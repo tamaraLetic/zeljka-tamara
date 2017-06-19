@@ -1,47 +1,13 @@
-
-<!--<h1>
-  Place input form
-</h1>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div> 
-      <label for="name">Name:</label><br>
-      <input type="text" id="Name" name="name" value="" [(ngModel)]="name">
-    </div>
-    <br>
-    <div>
-      <label for="Region">Region:</label><br>
-       <select [(ngModel)]="selectedRegion" name="selectedRegion">
-                <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
-            </select>
-
-    </div>
-  <br><br>
-  <div>
-      <input type="submit" value="Submit">
-  </div>
-</form> 
-
-<br><br>
-<div >
-  <ul>
-    <li *ngFor="let c of places" >
-      <place [place]="c"></place>
-      <button *ngIf="hasRight()" [routerLink]= "['/editPlace/', c.Id]">edit</button>
-      <button *ngIf="hasRight()" (click)="deletePlace(c.Id)">delete</button>
-    </li>
-  </ul>
-</div>-->
-
 <div class="login-container" style="width:35%;" >
   <div class="login-header">
     <h1 title="login">Place input form</h1>
   </div>
   <div class="login-form">
-    <form #f="ngForm" (ngSubmit)="onSubmit()">
-      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name" />
+    <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+      <input type="text" id="name" name="name" value="" [(ngModel)]="name" placeholder="Name" required/>
       <br /><br />
       <label for="Region">Region:</label><br>
-       <select [(ngModel)]="selectedRegion" name="selectedRegion">
+       <select [(ngModel)]="selectedRegion" name="selectedRegion" required>
                 <option *ngFor="let x of regions" [ngValue]="x" ><region [region]="x"></region></option>
             </select>
       <br /><br />

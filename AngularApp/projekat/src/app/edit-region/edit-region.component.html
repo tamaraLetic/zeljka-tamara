@@ -6,9 +6,9 @@
 
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" id="form" ngNativeValidate>
  
-      <input type="text" id="region.Name" name="region.Name" [(ngModel)]="region.Name"> 
+      <input type="text" id="region.Name" name="region.Name" [(ngModel)]="region.Name" required> 
     
    
   <br><br>

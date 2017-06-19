@@ -5,13 +5,13 @@
 </h1>
 </div>
 <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
     
-      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name">
+      <input type="text" id="Name" name="Name" value="" [(ngModel)]="Name" placeholder="Name" required>
     <br /><br />
     <div>
       <label for="Country">Country:</label><br>
-       <select [(ngModel)]="SelectedCountry" name="SelectedCountry">
+       <select [(ngModel)]="SelectedCountry" name="SelectedCountry" required>
                 <option *ngFor="let x of Countries" [ngValue]="x" ><country [country]="x"></country></option>
             </select>
 
