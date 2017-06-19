@@ -55,7 +55,7 @@ export class CommentListComponent implements OnInit {
     let token=localStorage.getItem("token");
     let userId=JSON.parse(token).id;
     console.log(userId);
-    this.canHeComent(userId, this.selectedAccommodation.Id);
+    this.canHeComent(userId, this.selectedAccommodation.Id, this.comments);
          
     
    
@@ -63,8 +63,8 @@ export class CommentListComponent implements OnInit {
 
   deleteComment(appUserId: number, accommodationId:number){
     //console.log(id);
-    
-    this.commentListService.delete(appUserId,accommodationId).subscribe(res => this.comments.splice(this.findIndex(res.json() as Comment),1));
+    //this.commentListService.delete(appUserId,accommodationId).subscribe(res => this.comments.splice(this.findIndex(res.json() as Comment),1));
+    this.commentListService.delete(appUserId,accommodationId).subscribe(res => this.comments.splice(this.comments.indexOf(res.json() as Comment),1));
   }
 
   hasRight(id: number): boolean{
@@ -90,44 +90,81 @@ export class CommentListComponent implements OnInit {
     }
     return -1;
   }
-  canHeComent(appUserId:number, accommodationId:number){
+  //first try to find if user already reviewed this accommodation
+  //then check if he spent time in that accommodation by checking his room reservations
+  canHeComent(appUserId:number, accommodationId:number, comments: Comment[]){
     let roomReservations=[];
     let rooms=[];
+    let commentsFiltered=[];
+    let commentsFiltered2=[];
+    let rrs=[];
+    let date=new Date();
     
-    this.roomReservationsListService.getAllFiltered(appUserId).subscribe(res=>{
+    commentsFiltered = comments.filter(
+          comment => (comment.AccommodationId === accommodationId)&&(comment.AppUserId===(+appUserId)));  
+
+    if(commentsFiltered){
+      if(commentsFiltered.length==0){
+          this.roomReservationsListService.getAllFiltered(appUserId).subscribe(res=>{
       roomReservations=res;
       //console.log(roomReservations);
-      if(roomReservations){
-          if(roomReservations.length>0){
-              for(let i=0; i<roomReservations.length; i++){
-                if(roomReservations[i].Reserved==true){
-                    rooms[i]=roomReservations[i].Room;
-                }
-                  
-              }
-
-              if(rooms){
-              //  console.log("Roooooms: "+rooms);
-                for(let j=0; j<rooms.length; j++){
-                  //pise da je AccommodationId undefined
-                  console.log(rooms);
-                  if(rooms[j]){
-                       if((rooms[j] as Room).AccommodationId==accommodationId){
-                            //return true;
-                            this.commentListService.create(new Comment(1, this.grade, this.text, this.selectedAccommodation.Id, +appUserId)).subscribe(res => this.comments.push(res.json()));
- 
+          if(roomReservations){
+              if(roomReservations.length>0){
+                  for(let i=0; i<roomReservations.length; i++){
+                    if(roomReservations[i].Reserved==true){
+                        rooms[i]=roomReservations[i].Room;
                     }
+                      
                   }
-                   
-                }
-                //return false;
-              }
-          }
-     
-      }
-      //return false;
+
+                  if(rooms){
+                  //  console.log("Roooooms: "+rooms);
+                    for(let j=0; j<rooms.length; j++){
+                      //pise da je AccommodationId undefined
+                      console.log(rooms);
+                      if(rooms[j]){
+                          if((rooms[j] as Room).AccommodationId==accommodationId){
+                                //return true;
+                                rrs=roomReservations.filter(rr=> rr.Room===rooms[j]);
+                                  console.log("Isti accommodationId");
+                                if(rrs[0]){
+                                  if((rrs[0] as RoomReservations).StartDate< this.getToday()){
+                                    //console.log("Usao je u date");
+                                      this.commentListService.create(new Comment(1, this.grade, this.text, this.selectedAccommodation.Id, +appUserId)).subscribe(res => this.comments.push(res.json()));
     
-    });
+                                  }
+                                }
+                                
+                        }
+                      }
+                      
+                    }
+                    //return false;
+                  }
+              }
+        
+          }
+          //return false;
+        
+        });
+      }
+      else{
+        console.log("He alredy reviewed this accommodation...");
+      }
+    }      
+    
 
    } 
+
+   getToday():Date{
+     let today = new Date();
+     let dd=today.getDay();
+     let mm=today.getMonth();
+     let yyyy=today.getFullYear();
+     let dateStr;
+      
+      dateStr=yyyy+'-'+mm+'-'+dd+'T00:00:00';
+      
+      return (dateStr as Date);
+   }
 }

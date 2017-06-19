@@ -45,7 +45,7 @@ export class ShowReviewsComponent implements OnInit {
   deleteComment(appUserId: number, accommodationId:number){
 
     //console.log(id);
-    this.commentService.delete(appUserId,accommodationId).subscribe(res => this.comments.splice(this.findIndex(res.json() as Comment),1));
+    this.commentService.delete(appUserId,accommodationId).subscribe(res => this.comments.splice(this.comments.indexOf(res.json() as Comment),1));
   }
 
   hasRight(id: number): boolean{
