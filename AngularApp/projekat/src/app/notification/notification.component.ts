@@ -20,7 +20,8 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit() {
     this.checkConnection();
-    this.subscribeForNotifications();
+    this.subscribeForNotificationsAdmin();
+    this.subscribeForNotificationsManager();
   }
 
   private checkConnection(){
@@ -31,8 +32,12 @@ export class NotificationComponent implements OnInit {
     });
   }
 
-  private subscribeForNotifications () {
+  private subscribeForNotificationsAdmin () {
     this.notifService.notificationReceivedAdmin.subscribe(e => this.onNotification(e));
+    //this.notifService.notificationReceivedManager.subscribe(e => this.onNotification(e));
+  }
+   private subscribeForNotificationsManager () {
+    //this.notifService.notificationReceivedAdmin.subscribe(e => this.onNotification(e));
     this.notifService.notificationReceivedManager.subscribe(e => this.onNotification(e));
   }
 

@@ -20,6 +20,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
         private ApplicationUserManager _userManager;
+        private static object lockObj = new object();
 
         public ApplicationUserManager UserManager
         {
@@ -112,26 +113,42 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(RoomReservations))]
         public IHttpActionResult PostRoomReservations(RoomReservations roomReservations)
         {
-            if (!ModelState.IsValid)
+            bool returnBedReq = false;
+
+            lock (lockObj)
+            {
+                if (!ModelState.IsValid)
+                {
+                    // return BadRequest(ModelState);
+                    returnBedReq = true;
+                }
+                else
+                {
+                    //check validation of room reservation addded
+                    foreach (RoomReservations item in db.RoomReservations)
+                    {
+                        if (item.RoomId == roomReservations.RoomId)
+                        {
+                            if (((roomReservations.StartDate <= item.EndDate) && (roomReservations.StartDate >= item.StartDate)) || ((roomReservations.EndDate >= item.StartDate) && (roomReservations.EndDate <= item.EndDate)))
+                            {
+                                // return BadRequest();
+                                returnBedReq = true;
+                            }
+                        }
+
+                    }
+                    db.RoomReservations.Add(roomReservations);
+                    db.SaveChanges();
+                }
+               
+                
+            }
+            if (returnBedReq)
             {
                 return BadRequest(ModelState);
             }
-            //check validation of room reservation addded
-            foreach (RoomReservations item in db.RoomReservations)
-            {
-                if (item.RoomId == roomReservations.RoomId)
-                {
-                    if (((roomReservations.StartDate<=item.EndDate) && (roomReservations.StartDate>=item.StartDate)) || ((roomReservations.EndDate>=item.StartDate) && (roomReservations.EndDate<=item.EndDate)))
-                    {
-                        return BadRequest();
-                    }
-                }
-               
-            }
-            db.RoomReservations.Add(roomReservations);
-            db.SaveChanges();
-
             return CreatedAtRoute("DefaultApi", new { controller = "RoomReservations", id = roomReservations.Id }, roomReservations);
+
         }
 
         [Authorize(Roles = "AppUser")]

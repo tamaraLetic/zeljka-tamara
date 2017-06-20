@@ -25,6 +25,7 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         private ApplicationUserManager _userManager;
+        private static object lockObj = new object();
 
         public ApplicationUserManager UserManager
         {
@@ -126,29 +127,47 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult Approve(Accommodation accommodation)
         {
-            if (!ModelState.IsValid)
+            bool returnBedReq = false;
+            bool notFound = false;
+
+
+            lock (lockObj)
+            {
+
+
+                if (!ModelState.IsValid)
+                {
+                    returnBedReq = true;
+                    // return BadRequest(ModelState);
+                }
+
+                db.Entry(accommodation).State = EntityState.Modified;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AccommodationExists(accommodation.Id))
+                    {
+                        // return NotFound();
+                        notFound = true;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            if (returnBedReq)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Entry(accommodation).State = EntityState.Modified;
-
-            try
+            else if (notFound)
             {
-                db.SaveChanges();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AccommodationExists(accommodation.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             Notification.NotifyManager(accommodation.AppUserId);
             return StatusCode(HttpStatusCode.NoContent);
         }

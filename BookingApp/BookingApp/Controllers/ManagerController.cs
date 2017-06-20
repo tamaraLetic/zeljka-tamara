@@ -16,6 +16,8 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        private static object lockObj = new object();
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [Route("getmanager")]
@@ -73,29 +75,44 @@ namespace BookingApp.Controllers
         [Route("banmanager")]
         public IHttpActionResult BanManager(AppUser user)
         {
-            if (!ModelState.IsValid)
+            bool returnBadReq = false;
+            bool returnNotFound = false;
+
+            lock (lockObj)
+            {
+                if (!ModelState.IsValid)
+                {
+                    //return BadRequest(ModelState);
+                    returnBadReq = true;
+                }
+
+                db.Entry(user).State = EntityState.Modified;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.Id))
+                    {
+                        //return NotFound();
+                        returnNotFound = true;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            if (returnNotFound)
+            {
+                return NotFound();
+            }
+            else if (returnBadReq)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(user.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
 

@@ -63,7 +63,9 @@ export class AccommodationListComponent implements OnInit {
 
     let token = localStorage.getItem("token");
     let userID = JSON.parse(token).id;
-    this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID), this.file).subscribe(res => this.accommodations.push(res.json()));
+    if((!isNaN(this.Latitude)) && (!isNaN(this.Longitude))){
+        this.accService.create(new Accommodation(1, this.Name, this.Description, this.Address, this.AvargeGrade, this.Latitude, this.Longitude, "", false, this.SelectedPlace.Id, this.SelectedAccType.Id, +userID), this.file).subscribe(res => this.accommodations.push(res.json()));
+    }
   }
 
   delete(id: number){
